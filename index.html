@@ -6,36 +6,34 @@ index.html
   <title>Nuestro universo</title>
 
   <style>
-    /* Reset básico */
+    /* Reset */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
     }
 
     body {
       height: 100vh;
-      background: radial-gradient(circle at bottom, #0b1d3a, #02040f);
+      background: radial-gradient(circle at bottom, #070b1f, #00010a);
       overflow: hidden;
       color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
     }
 
+    /* Texto principal (arriba) */
     .contenido {
-  position: absolute;
-  bottom: 8%;
-  width: 100%;
-  z-index: 2;
-}
-
+      position: absolute;
+      top: 40px;
+      width: 100%;
+      text-align: center;
+      z-index: 2;
+      pointer-events: none;
+    }
 
     h1 {
-      font-size: 3rem;
-      margin-bottom: 15px;
+      font-size: 2.8rem;
+      margin-bottom: 10px;
     }
 
     p {
@@ -43,12 +41,12 @@ index.html
       opacity: 0.85;
     }
 
-    /* Estrellas de fondo */
+    /* Estrellas normales (fondo) */
     .estrella {
       position: absolute;
       background: white;
       border-radius: 50%;
-      opacity: 0.8;
+      opacity: 0.7;
       animation: parpadeo 2s infinite alternate;
     }
 
@@ -57,22 +55,34 @@ index.html
       to { opacity: 1; }
     }
 
-    /* ⭐ Estrellas especiales */
-   .estrella.especial {
-     width: 9px;
-     height: 9px;
-     background: white;
-     border-radius: 50%;
-     box-shadow: 0 0 25px white;
-     cursor: pointer;
-     z-index: 3;
-}
+    /* ⭐ Estrellas especiales (clickeables) */
+    .estrella.especial {
+      width: 8px;
+      height: 8px;
+      background: white;
+      box-shadow: 0 0 15px white;
+      cursor: pointer;
+      z-index: 3;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
 
+    .estrella.especial:hover {
+      transform: scale(1.4);
+      box-shadow: 0 0 25px white;
     }
 
     .estrella.especial.activa {
       background: #ffd6ff;
-      box-shadow: 0 0 18px #ffd6ff;
+      box-shadow: 0 0 25px #ffd6ff;
+    }
+
+    /* Líneas entre estrellas */
+    .linea {
+      position: absolute;
+      height: 2px;
+      background: rgba(255,255,255,0.6);
+      transform-origin: 0 50%;
+      z-index: 2;
     }
 
     /* Popup */
@@ -82,11 +92,13 @@ index.html
       left: 50%;
       transform: translate(-50%, -50%);
       background: rgba(0,0,0,0.85);
-      padding: 20px 30px;
-      border-radius: 12px;
-      font-size: 1.5rem;
+      padding: 22px 28px;
+      border-radius: 14px;
+      font-size: 1.2rem;
       max-width: 80%;
+      text-align: center;
       z-index: 10;
+      cursor: pointer;
     }
 
     .oculto {
@@ -96,59 +108,90 @@ index.html
 </head>
 
 <body>
+
+  <!-- Texto principal -->
   <div class="contenido">
     <h1>Nuestro universo ✨</h1>
     <p>
       Algo solo y único para ti.<br>
-      Poco a poco lo convertiremos en algo increíble.
+      Poco a poco, estrella por estrella 💫
     </p>
   </div>
 
-  <!-- ⭐ Estrellas románticas clickeables -->
-  <div class="estrella especial" style="top:30%; left:40%;" data-message="Desde que llegaste, mi universo cambió ✨"></div>
-  <div class="estrella especial" style="top:55%; left:60%;" data-message="Cada estrella me recuerda a ti 💫"></div>
-  <div class="estrella especial" style="top:45%; left:25%;" data-message="Eres mi lugar seguro en este infinito 💙"></div>
+  <!-- ⭐ Estrellas especiales -->
+  <div class="estrella especial" style="top:35%; left:30%;" data-message="Desde que llegaste, mi universo cambió ✨"></div>
+  <div class="estrella especial" style="top:55%; left:50%;" data-message="Cada estrella me recuerda a ti 💫"></div>
+  <div class="estrella especial" style="top:40%; left:70%;" data-message="Eres mi lugar seguro en este infinito 💙"></div>
 
   <!-- Popup -->
   <div id="popup" class="popup oculto">
     <p id="popup-text"></p>
   </div>
 
-  <!-- 🌌 Estrellas de fondo -->
   <script>
+    /* Fondo de estrellas */
     const cantidad = 120;
     for (let i = 0; i < cantidad; i++) {
       const estrella = document.createElement("div");
       estrella.className = "estrella";
-
       const size = Math.random() * 2 + 1;
       estrella.style.width = size + "px";
       estrella.style.height = size + "px";
       estrella.style.top = Math.random() * 100 + "vh";
       estrella.style.left = Math.random() * 100 + "vw";
       estrella.style.animationDuration = (Math.random() * 3 + 1) + "s";
-
       document.body.appendChild(estrella);
     }
-  </script>
 
-  <!-- 💙 Interacción romántica -->
-  <script>
+    /* Estrellas especiales + conexiones */
     const especiales = document.querySelectorAll(".estrella.especial");
     const popup = document.getElementById("popup");
     const popupText = document.getElementById("popup-text");
+    let activadas = [];
 
     especiales.forEach(e => {
       e.addEventListener("click", () => {
+        if (e.classList.contains("activa")) return;
+
         popupText.textContent = e.dataset.message;
         popup.classList.remove("oculto");
         e.classList.add("activa");
+        activadas.push(e);
+
+        if (activadas.length > 1) {
+          conectar(activadas[activadas.length - 2], e);
+        }
       });
     });
 
     popup.addEventListener("click", () => {
       popup.classList.add("oculto");
     });
+
+    function conectar(a, b) {
+      const r1 = a.getBoundingClientRect();
+      const r2 = b.getBoundingClientRect();
+
+      const x1 = r1.left + r1.width / 2;
+      const y1 = r1.top + r1.height / 2;
+      const x2 = r2.left + r2.width / 2;
+      const y2 = r2.top + r2.height / 2;
+
+      const dx = x2 - x1;
+      const dy = y2 - y1;
+      const distancia = Math.sqrt(dx * dx + dy * dy);
+      const angulo = Math.atan2(dy, dx) * 180 / Math.PI;
+
+      const linea = document.createElement("div");
+      linea.className = "linea";
+      linea.style.width = distancia + "px";
+      linea.style.left = x1 + "px";
+      linea.style.top = y1 + "px";
+      linea.style.transform = `rotate(${angulo}deg)`;
+
+      document.body.appendChild(linea);
+    }
   </script>
+
 </body>
 </html>
