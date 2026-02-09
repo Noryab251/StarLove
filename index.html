@@ -57,38 +57,56 @@ index.html
 
     /* ⭐ Estrellas especiales (clickeables) */
     .estrella.especial {
-      width: 8px;
-      height: 8px;
-      background: white;
-      box-shadow: 0 0 15px white;
-      cursor: pointer;
-      z-index: 3;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
+  width: 7px;
+  height: 7px;
+  background: #e6f2ff;
+  border-radius: 50%;
+  position: absolute;
+  cursor: pointer;
+  z-index: 3;
+  box-shadow:
+    0 0 6px rgba(180,220,255,0.9),
+    0 0 12px rgba(120,180,255,0.6);
+  animation: latido 2.5s infinite ease-in-out;
+}
+@keyframes latido {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 1;
+  }
+}
     .estrella.especial:hover {
       transform: scale(1.4);
       box-shadow: 0 0 25px white;
     }
 
     .estrella.especial.activa {
-      background: #ffd6ff;
-      box-shadow: 0 0 25px #ffd6ff;
-    }
+  background: #ffffff;
+  box-shadow:
+    0 0 10px #ffffff,
+    0 0 20px rgba(200,220,255,1);
+}
+
 
     /* Líneas entre estrellas */
     .linea {
   position: absolute;
-  height: 2px;
-  background: linear-gradient(
-    to right,
-    rgba(255,255,255,0.2),
-    rgba(255,255,255,0.9)
-  );
+  height: 1.2px;
+  background: rgba(200, 220, 255, 0.8);
   transform-origin: 0 50%;
   z-index: 2;
   width: 0;
   animation: dibujar 1s ease-out forwards;
+  box-shadow: 0 0 6px rgba(180,200,255,0.6);
+}
+
+@keyframes dibujar {
+  from { width: 0; }
+  to { width: var(--longitud); }
 }
 
 @keyframes dibujar {
@@ -181,7 +199,9 @@ if (activadas.length > 1) {
 
 // Si ya están todas, cierra la constelación
 if (activadas.length === totalConstelacion) {
-  conectar(activadas[activadas.length - 1], activadas[0]);
+  setTimeout(() => {
+    conectar(activadas[activadas.length - 1], activadas[0]);
+  }, 1000); // mismo tiempo que la animación de la línea
 }
 
       });
