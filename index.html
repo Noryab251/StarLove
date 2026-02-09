@@ -26,8 +26,12 @@ index.html
     }
 
     .contenido {
-      z-index: 2;
-    }
+  position: absolute;
+  bottom: 8%;
+  width: 100%;
+  z-index: 2;
+}
+
 
     h1 {
       font-size: 3rem;
@@ -54,12 +58,16 @@ index.html
     }
 
     /* ⭐ Estrellas especiales */
-    .estrella.especial {
-      width: 4px;
-      height: 4px;
-      box-shadow: 0 0 10px white;
-      cursor: pointer;
-      z-index: 3;
+   .estrella.especial {
+     width: 9px;
+     height: 9px;
+     background: white;
+     border-radius: 50%;
+     box-shadow: 0 0 25px white;
+     cursor: pointer;
+     z-index: 3;
+}
+
     }
 
     .estrella.especial.activa {
