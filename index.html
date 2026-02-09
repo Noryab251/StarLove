@@ -174,9 +174,16 @@ index.html
         e.classList.add("activa");
         activadas.push(e);
 
-        if (activadas.length > 1) {
-          conectar(activadas[activadas.length - 2], e);
-        }
+// Conecta con la anterior
+if (activadas.length > 1) {
+  conectar(activadas[activadas.length - 2], e);
+}
+
+// Si ya están todas, cierra la constelación
+if (activadas.length === totalConstelacion) {
+  conectar(activadas[activadas.length - 1], activadas[0]);
+}
+
       });
     });
 
@@ -207,6 +214,7 @@ index.html
 
   document.body.appendChild(linea);
 }
+const totalConstelacion = especiales.length;
 
   </script>
 
