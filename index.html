@@ -54,6 +54,36 @@ index.html
       to { opacity: 1; }
     }
   </style>
+  .estrella.especial {
+  width: 4px;
+  height: 4px;
+  box-shadow: 0 0 10px white;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.estrella.especial.activa {
+  background: #ffd6ff;
+  box-shadow: 0 0 18px #ffd6ff;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.85);
+  padding: 20px 30px;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  max-width: 80%;
+  z-index: 10;
+}
+
+.oculto {
+  display: none;
+}
+
 </head>
 
 <body>
@@ -64,7 +94,34 @@ index.html
     Poco a poco lo convertiremos en algo increíble.</p>
   </div>
 
-  <!-- Estrellas -->
+<!-- Estrellas románticas -->
+<div class="star special" style="top:30%; left:40%;" data-message="Desde que llegaste, mi universo cambió ✨"></div>
+<div class="star special" style="top:55%; left:60%;" data-message="Cada estrella me recuerda a ti 💫"></div>
+<div class="star special" style="top:45%; left:25%;" data-message="Eres mi lugar seguro en este infinito 💙"></div>
+
+<!-- Mensaje emergente -->
+<div id="popup" class="popup hidden">
+  <p id="popup-text"></p>
+</div>
+
+<script>
+  const stars = document.querySelectorAll('.special');
+  const popup = document.getElementById('popup');
+  const popupText = document.getElementById('popup-text');
+
+  stars.forEach(star => {
+    star.addEventListener('click', () => {
+      popupText.textContent = star.dataset.message;
+      popup.classList.remove('hidden');
+      star.classList.add('active');
+    });
+  });
+
+  popup.addEventListener('click', () => {
+    popup.classList.add('hidden');
+  });
+</script>
+
   <script>
     const cantidad = 120;
 
@@ -84,6 +141,22 @@ index.html
       document.body.appendChild(estrella);
     }
   </script>
+<script>
+  const especiales = document.querySelectorAll(".estrella.especial");
+  const popup = document.getElementById("popup");
+  const popupText = document.getElementById("popup-text");
 
+  especiales.forEach(e => {
+    e.addEventListener("click", () => {
+      popupText.textContent = e.dataset.message;
+      popup.classList.remove("oculto");
+      e.classList.add("activa");
+    });
+  });
+
+  popup.addEventListener("click", () => {
+    popup.classList.add("oculto");
+  });
+</script> 
 </body>
 </html>
