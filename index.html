@@ -2,241 +2,187 @@ index.html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Nuestro universo</title>
+<meta charset="UTF-8">
+<title>Nuestro universo</title>
 
-  <style>
-    /* Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Arial', sans-serif;
-    }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
 
-    body {
-      height: 100vh;
-      background: radial-gradient(circle at bottom, #070b1f, #00010a);
-      overflow: hidden;
-      color: white;
-    }
+body {
+  height: 100vh;
+  background: radial-gradient(circle at bottom, #020824, #00010a);
+  overflow: hidden;
+  color: white;
+}
 
-    /* Texto principal (arriba) */
-    .contenido {
-      position: absolute;
-      top: 40px;
-      width: 100%;
-      text-align: center;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    h1 {
-      font-size: 2.8rem;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 1.2rem;
-      opacity: 0.85;
-    }
-
-    /* Estrellas normales (fondo) */
-    .estrella {
-      position: absolute;
-      background: white;
-      border-radius: 50%;
-      opacity: 0.7;
-      animation: parpadeo 2s infinite alternate;
-    }
-
-    @keyframes parpadeo {
-      from { opacity: 0.3; }
-      to { opacity: 1; }
-    }
-
-    /* ⭐ Estrellas especiales (clickeables) */
-    .estrella.especial {
-  width: 7px;
-  height: 7px;
-  background: #e6f2ff;
-  border-radius: 50%;
+/* Texto inicial */
+.contenido {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+}
+h1 { font-size: 3rem; }
+p { opacity: 0.85; }
+
+/* Estrellas de fondo */
+.estrella {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: parpadeo 2s infinite alternate;
+}
+@keyframes parpadeo {
+  from { opacity: 0.3; }
+  to { opacity: 1; }
+}
+
+/* Estrellas especiales (constelación) */
+.estrella.especial {
+  width: 8px;
+  height: 8px;
+  background: #e8f7ff;
+  box-shadow: 0 0 12px #9fdcff;
   cursor: pointer;
   z-index: 3;
-  box-shadow:
-    0 0 6px rgba(180,220,255,0.9),
-    0 0 12px rgba(120,180,255,0.6);
-  animation: latido 2.5s infinite ease-in-out;
 }
-@keyframes latido {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.9;
-  }
-  50% {
-    transform: scale(1.25);
-    opacity: 1;
-  }
-}
-    .estrella.especial:hover {
-      transform: scale(1.4);
-      box-shadow: 0 0 25px white;
-    }
-
-    .estrella.especial.activa {
-  background: #ffffff;
-  box-shadow:
-    0 0 10px #ffffff,
-    0 0 20px rgba(200,220,255,1);
+.estrella.especial.activa {
+  background: #b8ecff;
+  box-shadow: 0 0 18px #b8ecff;
 }
 
-
-    /* Líneas entre estrellas */
-    .linea {
+/* Líneas */
+.linea {
   position: absolute;
-  height: 1.2px;
-  background: rgba(200, 220, 255, 0.8);
+  height: 1.5px;
+  background: rgba(160,220,255,0.8);
   transform-origin: 0 50%;
-  z-index: 2;
-  width: 0;
-  animation: dibujar 1s ease-out forwards;
-  box-shadow: 0 0 6px rgba(180,200,255,0.6);
+  z-index: 1;
 }
 
-@keyframes dibujar {
-  from { width: 0; }
-  to { width: var(--longitud); }
+/* Popup */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.85);
+  padding: 20px 30px;
+  border-radius: 14px;
+  font-size: 1.2rem;
+  z-index: 10;
 }
-
-@keyframes dibujar {
-  from {
-    width: 0;
-  }
-  to {
-    width: var(--longitud);
-  }
-}
-
-
-    /* Popup */
-    .popup {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0,0,0,0.85);
-      padding: 22px 28px;
-      border-radius: 14px;
-      font-size: 1.2rem;
-      max-width: 80%;
-      text-align: center;
-      z-index: 10;
-      cursor: pointer;
-    }
-
-    .oculto {
-      display: none;
-    }
-  </style>
+.oculto { display: none; }
+</style>
 </head>
 
 <body>
 
-  <!-- Texto principal -->
-  <div class="contenido">
-    <h1>Nuestro universo ✨</h1>
-    <p>
-      Algo solo y único para ti.<br>
-      Poco a poco, estrella por estrella 💫
-    </p>
-  </div>
+<div class="contenido">
+  <h1>Nuestro universo ✨</h1>
+  <p>Un cielo hecho con calma,<br>estrella por estrella.</p>
+</div>
 
-  <!-- ⭐ Estrellas especiales -->
-  <div class="estrella especial" style="top:35%; left:30%;" data-message="Desde que llegaste, mi universo cambió ✨"></div>
-  <div class="estrella especial" style="top:55%; left:50%;" data-message="Cada estrella me recuerda a ti 💫"></div>
-  <div class="estrella especial" style="top:40%; left:70%;" data-message="Eres mi lugar seguro en este infinito 💙"></div>
+<!-- Constelación del Cisne -->
+<div class="estrella especial" style="top:25%; left:50%;" data-id="a"></div>
+<div class="estrella especial" style="top:35%; left:48%;" data-id="b"></div>
+<div class="estrella especial" style="top:45%; left:46%;" data-id="c"></div>
+<div class="estrella especial" style="top:55%; left:48%;" data-id="d"></div>
+<div class="estrella especial" style="top:65%; left:50%;" data-id="e"></div>
 
-  <!-- Popup -->
-  <div id="popup" class="popup oculto">
-    <p id="popup-text"></p>
-  </div>
+<!-- Popup -->
+<div id="popup" class="popup oculto">
+  <p id="popup-text"></p>
+</div>
 
-  <script>
-    /* Fondo de estrellas */
-    const cantidad = 120;
-    for (let i = 0; i < cantidad; i++) {
-      const estrella = document.createElement("div");
-      estrella.className = "estrella";
-      const size = Math.random() * 2 + 1;
-      estrella.style.width = size + "px";
-      estrella.style.height = size + "px";
-      estrella.style.top = Math.random() * 100 + "vh";
-      estrella.style.left = Math.random() * 100 + "vw";
-      estrella.style.animationDuration = (Math.random() * 3 + 1) + "s";
-      document.body.appendChild(estrella);
+<script>
+/* Estrellas de fondo */
+for (let i = 0; i < 140; i++) {
+  const e = document.createElement("div");
+  e.className = "estrella";
+  const s = Math.random() * 2 + 1;
+  e.style.width = s + "px";
+  e.style.height = s + "px";
+  e.style.top = Math.random() * 100 + "vh";
+  e.style.left = Math.random() * 100 + "vw";
+  e.style.animationDuration = (Math.random()*3+1)+"s";
+  document.body.appendChild(e);
+}
+
+/* Constelación */
+const estrellas = document.querySelectorAll(".estrella.especial");
+let activadas = [];
+let lineas = [];
+
+estrellas.forEach(e => {
+  e.addEventListener("click", () => {
+    if (e.classList.contains("activa")) return;
+
+    e.classList.add("activa");
+    activadas.push(e);
+
+    if (activadas.length > 1) {
+      conectar(activadas[activadas.length-2], e);
     }
 
-    /* Estrellas especiales + conexiones */
-    const especiales = document.querySelectorAll(".estrella.especial");
-    const popup = document.getElementById("popup");
-    const popupText = document.getElementById("popup-text");
-    let activadas = [];
+    if (activadas.length === estrellas.length) {
+      setTimeout(() => {
+        conectar(activadas[activadas.length-1], activadas[0]);
+        mostrarMensaje();
+      }, 600);
+    }
+  });
+});
 
-    especiales.forEach(e => {
-      e.addEventListener("click", () => {
-        if (e.classList.contains("activa")) return;
+function conectar(a, b) {
+  const r1 = a.getBoundingClientRect();
+  const r2 = b.getBoundingClientRect();
 
-        popupText.textContent = e.dataset.message;
-        popup.classList.remove("oculto");
-        e.classList.add("activa");
-        activadas.push(e);
-
-// Conecta con la anterior
-if (activadas.length > 1) {
-  conectar(activadas[activadas.length - 2], e);
-}
-
-// Si ya están todas, cierra la constelación
-if (activadas.length === totalConstelacion) {
-  setTimeout(() => {
-    conectar(activadas[activadas.length - 1], activadas[0]);
-  }, 1000); // mismo tiempo que la animación de la línea
-}
-
-      });
-    });
-
-    popup.addEventListener("click", () => {
-      popup.classList.add("oculto");
-    });
-
-    function conectar(a, b) {
-  const rect1 = a.getBoundingClientRect();
-  const rect2 = b.getBoundingClientRect();
-
-  const x1 = rect1.left + rect1.width / 2;
-  const y1 = rect1.top + rect1.height / 2;
-  const x2 = rect2.left + rect2.width / 2;
-  const y2 = rect2.top + rect2.height / 2;
+  const x1 = r1.left + r1.width/2;
+  const y1 = r1.top + r1.height/2;
+  const x2 = r2.left + r2.width/2;
+  const y2 = r2.top + r2.height/2;
 
   const dx = x2 - x1;
   const dy = y2 - y1;
-  const distancia = Math.sqrt(dx * dx + dy * dy);
-  const angulo = Math.atan2(dy, dx) * 180 / Math.PI;
+  const dist = Math.sqrt(dx*dx + dy*dy);
+  const ang = Math.atan2(dy, dx) * 180/Math.PI;
 
-  const linea = document.createElement("div");
-  linea.className = "linea";
-  linea.style.setProperty("--longitud", distancia + "px");
-  linea.style.left = x1 + "px";
-  linea.style.top = y1 + "px";
-  linea.style.transform = `rotate(${angulo}deg)`;
+  const l = document.createElement("div");
+  l.className = "linea";
+  l.style.left = x1+"px";
+  l.style.top = y1+"px";
+  l.style.transform = `rotate(${ang}deg)`;
+  l.style.width = "0px";
 
-  document.body.appendChild(linea);
+  document.body.appendChild(l);
+
+  let w = 0;
+  const anim = setInterval(() => {
+    w += dist/30;
+    l.style.width = w+"px";
+    if (w >= dist) clearInterval(anim);
+  }, 16);
 }
-const totalConstelacion = especiales.length;
 
-  </script>
+function mostrarMensaje() {
+  const popup = document.getElementById("popup");
+  document.getElementById("popup-text").textContent =
+    "Así como estas estrellas se unen,\nmi mundo también se completa contigo 💫";
+  popup.classList.remove("oculto");
+}
+
+document.getElementById("popup").onclick = () =>
+  document.getElementById("popup").classList.add("oculto");
+</script>
 
 </body>
 </html>
