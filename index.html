@@ -110,12 +110,15 @@ p{font-size:1.2rem;opacity:.85;}
   <p>Algo solo y único para ti.<br>poco a poco, estrella por estrella 💫</p>
 </div>
 
-<!-- 🦢 CISNE -->
-<div class="estrella especial" style="top:25%; left:50%;" data-const="cisne" data-message="El cisne guía mi camino 🦢"></div>
-<div class="estrella especial" style="top:35%; left:45%;" data-const="cisne" data-message="Contigo encuentro dirección"></div>
-<div class="estrella especial" style="top:45%; left:50%;" data-const="cisne" data-message="Mi centro eres tú"></div>
-<div class="estrella especial" style="top:55%; left:55%;" data-const="cisne" data-message="Siempre vuelvo a ti"></div>
-<div class="estrella especial" style="top:65%; left:50%;" data-const="cisne" data-message="Mi lugar seguro 💙"></div>
+<!-- ⭐ Constelación del Cisne -->
+<div class="estrella especial" id="c1" style="top:25%; left:50%;"></div>
+<div class="estrella especial" id="c2" style="top:35%; left:50%;"></div>
+<div class="estrella especial" id="c3" style="top:45%; left:50%;"></div>
+<div class="estrella especial" id="c4" style="top:55%; left:50%;"></div>
+<div class="estrella especial" id="c5" style="top:65%; left:50%;"></div>
+<div class="estrella especial" id="c5" style="top:65%; left:50%;"></div>
+<div class="estrella especial" id="c6" style="top:45%; left:35%;"></div>
+<div class="estrella especial" id="c7" style="top:45%; left:65%;"></div>
 
 <!-- 🎵 LIRA -->
 <div class="estrella especial" style="top:25%; left:18%;" data-const="lira" data-message="Nuestra melodía empieza aquí 🎵"></div>
@@ -148,68 +151,47 @@ for(let i=0;i<120;i++){
   document.body.appendChild(e);
 }
 
-/* constelaciones */
-const especiales=document.querySelectorAll(".estrella.especial");
-const popup=document.getElementById("popup");
-const popupText=document.getElementById("popup-text");
+<script>
+const conexionesCisne = [
+  ["c1","c2"],
+  ["c2","c3"],
+  ["c3","c4"],
+  ["c4","c5"],
+  ["c3","c6"],
+  ["c3","c7"]
+];
 
-let progreso={cisne:[],lira:[],aguila:[]};
-let completadas=new Set();
+let activadas = new Set();
 
-especiales.forEach(e=>{
-  e.addEventListener("click",()=>{
+document.querySelectorAll(".estrella.especial").forEach(e => {
+  e.addEventListener("click", () => {
+    if (activadas.has(e.id)) return;
 
-    if(e.classList.contains("activa")) return;
-
-    const grupo=e.dataset.const;
+    activadas.add(e.id);
     e.classList.add("activa");
 
-    popupText.textContent=e.dataset.message;
-    popup.classList.remove("oculto");
-
-    progreso[grupo].push(e);
-
-    if(progreso[grupo].length>1){
-      conectar(
-        progreso[grupo][progreso[grupo].length-2],
-        e
-      );
-    }
-
-    const total=document.querySelectorAll(`[data-const="${grupo}"]`).length;
-
-    if(progreso[grupo].length===total){
-
-      setTimeout(()=>{
+    conexionesCisne.forEach(([a,b]) => {
+      if (activadas.has(a) && activadas.has(b)) {
         conectar(
-          progreso[grupo][progreso[grupo].length-1],
-          progreso[grupo][0]
+          document.getElementById(a),
+          document.getElementById(b)
         );
+      }
+    });
 
-        completadas.add(grupo);
-
-        setTimeout(()=>{
-          popupText.textContent=
-            "✨ Constelación "+grupo.toUpperCase()+" completada";
-          popup.classList.remove("oculto");
-
-          if(completadas.size===3){
-            setTimeout(()=>{
-              popupText.textContent=
-                "🌌 Todas las constelaciones están completas… y mi universo también contigo 💙";
-              popup.classList.remove("oculto");
-            },900);
-          }
-
-        },700);
-
-      },800);
+    if (activadas.size === conexionesCisne.length + 1) {
+      setTimeout(() => {
+        popupText.textContent =
+          "🦢 Has formado la constelación del Cisne";
+        popup.classList.remove("oculto");
+      }, 800);
     }
-
   });
 });
+  
+</script>
 
-popup.addEventListener("click",()=>{
+  popup.addEventListener("click",()=>{
   popup.classList.add("oculto");
 });
 
