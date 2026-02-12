@@ -15,7 +15,8 @@ index.html
 
 body{
   height:100vh;
-  background: radial-gradient(circle at center, #0a0e29 0%, #00010a 100%);
+  /* Fondo original más oscuro */
+  background:radial-gradient(circle at bottom,#070b1f,#00010a);
   overflow:hidden;
   color:white;
 }
@@ -28,49 +29,54 @@ body{
   z-index:2;
   pointer-events:none;
 }
-h1{font-size:2.5rem; margin-bottom:10px; text-shadow: 0 0 15px rgba(255,255,255,0.5);}
-p{font-size:1.1rem; opacity:.8; letter-spacing: 1px;}
+h1{font-size:2.8rem;margin-bottom:10px;}
+p{font-size:1.2rem;opacity:.85;}
 
 /* Estrellas de fondo */
 .estrella{
   position:absolute;
   background:white;
   border-radius:50%;
-  opacity:.5;
+  opacity:.7;
   animation:parpadeo var(--d) infinite alternate;
 }
 @keyframes parpadeo{
-  from{opacity:.2; transform: scale(0.8);}
-  to{opacity:.8; transform: scale(1.2);}
+  from{opacity:.3;}
+  to{opacity:1;}
 }
 
-/* Estrellas de las constelaciones */
+/* Estrellas de las constelaciones - Estilo original */
 .estrella.especial{
-  width:8px;
-  height:8px;
-  background:#fff;
+  width:7px;
+  height:7px;
+  background:#e6f2ff; /* Color original */
   border-radius:50%;
   position:absolute;
   cursor:pointer;
   z-index:3;
-  box-shadow:0 0 10px #fff, 0 0 20px rgba(120,180,255,0.8);
-  transition: transform 0.3s;
+  /* Sombra original más suave */
+  box-shadow:0 0 6px rgba(180,220,255,.9),
+             0 0 12px rgba(120,180,255,.6);
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
 }
 .estrella.especial:hover { transform: scale(1.5); }
 .estrella.especial.activa{
-  background:#00f2ff;
-  box-shadow:0 0 15px #00f2ff, 0 0 30px #00f2ff;
+  background:#fff;
+  /* Sombra activa original */
+  box-shadow:0 0 10px #fff,
+             0 0 20px rgba(200,220,255,1);
 }
 
-/* Líneas de conexión */
+/* Líneas de conexión - Color original */
 .linea{
   position:absolute;
-  height:1.5px;
-  background: linear-gradient(90deg, #00f2ff, rgba(255,255,255,0.2));
+  height:1.2px;
+  background:rgba(200,220,255,.8); /* Color original */
   transform-origin:0 50%;
   z-index:2;
   width:0;
   animation:dibujar 0.8s ease-out forwards;
+  box-shadow:0 0 6px rgba(180,200,255,.6); /* Sombra original */
 }
 @keyframes dibujar{ to{width:var(--longitud);} }
 
@@ -80,15 +86,16 @@ p{font-size:1.1rem; opacity:.8; letter-spacing: 1px;}
   bottom:50px;
   left:50%;
   transform:translateX(-50%);
-  background:rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
-  padding:15px 30px;
-  border-radius:50px;
-  border: 1px solid rgba(255,255,255,0.2);
-  font-size:1.1rem;
+  background:rgba(0,0,0,.85); /* Fondo original */
+  padding:22px 28px;
+  border-radius:14px;
+  font-size:1.2rem;
+  max-width:80%;
+  text-align:center;
   z-index:10;
   cursor:pointer;
   animation: fadeIn 0.5s;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 @keyframes fadeIn { from{opacity:0; bottom:30px;} to{opacity:1; bottom:50px;} }
 .oculto{display:none;}
@@ -98,26 +105,26 @@ p{font-size:1.1rem; opacity:.8; letter-spacing: 1px;}
 
 <div class="contenido">
   <h1>Nuestro universo ✨</h1>
-  <p>El Triángulo de Verano: un puente entre nosotros.</p>
+  <p>Algo solo y único para ti.<br>poco a poco, estrella por estrella 💫</p>
 </div>
 
-<div class="estrella especial" style="top:20%; left:30%;" data-const="lira" data-message="Eres mi estrella Vega, la que más brilla 🎵"></div>
-<div class="estrella especial" style="top:25%; left:33%;" data-const="lira" data-message="Nuestra melodía nunca termina"></div>
-<div class="estrella especial" style="top:32%; left:32%;" data-const="lira" data-message="Cada nota es un recuerdo contigo"></div>
-<div class="estrella especial" style="top:30%; left:28%;" data-const="lira" data-message="Contigo todo suena mejor"></div>
-<div class="estrella especial" style="top:23%; left:27%;" data-const="lira" data-message="Un compás perfecto 🎶"></div>
+<div class="estrella especial" id="lyra1" style="top:20%; left:30%;" data-const="lira" data-message="Eres mi estrella Vega, la que más brilla 🎵"></div>
+<div class="estrella especial" id="lyra2" style="top:25%; left:33%;" data-const="lira" data-message="Nuestra melodía nunca termina"></div>
+<div class="estrella especial" id="lyra3" style="top:32%; left:32%;" data-const="lira" data-message="Cada nota es un recuerdo contigo"></div>
+<div class="estrella especial" id="lyra4" style="top:30%; left:28%;" data-const="lira" data-message="Contigo todo suena mejor"></div>
+<div class="estrella especial" id="lyra5" style="top:23%; left:27%;" data-const="lira" data-message="Un compás perfecto 🎶"></div>
 
-<div class="estrella especial" style="top:15%; left:50%;" data-const="cisne" data-message="Deneb marca el inicio de este viaje ✨"></div>
-<div class="estrella especial" style="top:30%; left:50%;" data-const="cisne" data-message="En el centro de mi pecho estás tú"></div>
-<div class="estrella especial" style="top:55%; left:50%;" data-const="cisne" data-message="Albireo: donde nuestros mundos se unen"></div>
-<div class="estrella especial" style="top:30%; left:35%;" data-const="cisne" data-message="Extendiendo las alas para protegerte"></div>
-<div class="estrella especial" style="top:30%; left:65%;" data-const="cisne" data-message="Volando siempre hacia el mismo destino"></div>
+<div class="estrella especial" id="cisne1" style="top:15%; left:50%;" data-const="cisne" data-message="Deneb marca el inicio de este viaje ✨"></div>
+<div class="estrella especial" id="cisne2" style="top:30%; left:50%;" data-const="cisne" data-message="En el centro de mi pecho estás tú"></div>
+<div class="estrella especial" id="cisne3" style="top:55%; left:50%;" data-const="cisne" data-message="Albireo: donde nuestros mundos se unen"></div>
+<div class="estrella especial" id="cisne4" style="top:30%; left:35%;" data-const="cisne" data-message="Extendiendo las alas para protegerte"></div>
+<div class="estrella especial" id="cisne5" style="top:30%; left:65%;" data-const="cisne" data-message="Volando siempre hacia el mismo destino"></div>
 
-<div class="estrella especial" style="top:65%; left:70%;" data-const="aguila" data-message="Altair: mi guía en la oscuridad 🦅"></div>
-<div class="estrella especial" style="top:60%; left:67%;" data-const="aguila" data-message="Me haces sentir libre"></div>
-<div class="estrella especial" style="top:70%; left:73%;" data-const="aguila" data-message="Vuelo alto cuando estás cerca"></div>
-<div class="estrella especial" style="top:80%; left:65%;" data-const="aguila" data-message="Mi cielo favorito eres tú"></div>
-<div class="estrella especial" style="top:75%; left:55%;" data-const="aguila" data-message="Siempre regreso a tu lado"></div>
+<div class="estrella especial" id="aguila1" style="top:65%; left:70%;" data-const="aguila" data-message="Altair: mi guía en la oscuridad 🦅"></div>
+<div class="estrella especial" id="aguila2" style="top:60%; left:67%;" data-const="aguila" data-message="Me haces sentir libre"></div>
+<div class="estrella especial" id="aguila3" style="top:70%; left:73%;" data-const="aguila" data-message="Vuelo alto cuando estás cerca"></div>
+<div class="estrella especial" id="aguila4" style="top:80%; left:65%;" data-const="aguila" data-message="Mi cielo favorito eres tú"></div>
+<div class="estrella especial" id="aguila5" style="top:75%; left:55%;" data-const="aguila" data-message="Siempre regreso a tu lado"></div>
 
 <div id="popup" class="popup oculto">
   <p id="popup-text"></p>
@@ -137,42 +144,75 @@ for(let i=0; i<150; i++){
   document.body.appendChild(e);
 }
 
-const progreso={cisne:[],lira:[],aguila:[]};
-let completadas=new Set();
+// MAPA DE CONEXIONES REALES
+// Define qué estrella se conecta con cuál para formar la figura correcta.
+const conexiones = {
+  'lira1': ['lyra2', 'lyra5'], // Vega se conecta con las dos de arriba del paralelogramo
+  'lyra2': ['lyra1', 'lyra3'],
+  'lyra3': ['lyra2', 'lyra4'],
+  'lyra4': ['lyra3', 'lyra5'],
+  'lyra5': ['lyra4', 'lyra1'], // Cierra el paralelogramo
+  
+  'cisne1': ['cisne2'], // Deneb con Sadr (centro)
+  'cisne2': ['cisne1', 'cisne3', 'cisne4', 'cisne5'], // Sadr es el centro de la cruz
+  'cisne3': ['cisne2'], // Albireo con Sadr
+  'cisne4': ['cisne2'], // Ala izquierda con Sadr
+  'cisne5': ['cisne2'], // Ala derecha con Sadr
 
-document.querySelectorAll(".estrella.especial").forEach(e=>{
-  e.addEventListener("click",()=>{
+  'aguila1': ['aguila2', 'aguila3'], // Altair en el centro de la línea de tres
+  'aguila2': ['aguila1', 'aguila4'], // Tarazed conecta con Altair y el cuerpo
+  'aguila3': ['aguila1'], // Alshain solo con Altair en este modelo simple
+  'aguila4': ['aguila2', 'aguila5'], // Cuerpo conecta con Tarazed y la punta del ala
+  'aguila5': ['aguila4'] // Punta del ala con el cuerpo
+};
+
+const progreso = {cisne:0, lira:0, aguila:0};
+let completadas = new Set();
+const estrellasMap = {}; // Para buscar estrellas por su ID rápidamente
+
+document.querySelectorAll(".estrella.especial").forEach(e => {
+  estrellasMap[e.id] = e; // Guardar referencia por ID
+
+  e.addEventListener("click", () => {
     if(e.classList.contains("activa")) return;
 
-    const grupo=e.dataset.const;
+    const grupo = e.dataset.const;
     e.classList.add("activa");
+    progreso[grupo]++;
 
-    const popup=document.getElementById("popup");
-    document.getElementById("popup-text").textContent=e.dataset.message;
+    const popup = document.getElementById("popup");
+    document.getElementById("popup-text").textContent = e.dataset.message;
     popup.classList.remove("oculto");
 
-    progreso[grupo].push(e);
-
-    // Lógica de conexión manual para mantener la forma real
-    if(progreso[grupo].length > 1) {
-      conectar(progreso[grupo][progreso[grupo].length-2], e);
+    // NUEVA LÓGICA DE CONEXIÓN
+    // Busca en el mapa con quién se debe conectar esta estrella
+    if (conexiones[e.id]) {
+      conexiones[e.id].forEach(vecinoId => {
+        const vecino = estrellasMap[vecinoId];
+        // Si el vecino ya está activo, dibuja la línea
+        if (vecino && vecino.classList.contains("activa")) {
+          conectar(e, vecino);
+        }
+      });
     }
 
-    const total=document.querySelectorAll(`[data-const="${grupo}"]`).length;
-    if(progreso[grupo].length === total){
-      setTimeout(()=>{
-        // Cerrar la figura según la constelación
-        if(grupo==='lira' || grupo==='cisne') conectar(progreso[grupo][total-1], progreso[grupo][0]);
-        
+    const total = document.querySelectorAll(`[data-const="${grupo}"]`).length;
+    if(progreso[grupo] === total){
+      setTimeout(() => {
         completadas.add(grupo);
+        document.getElementById("popup-text").textContent = "✨ Constelación " + grupo.toUpperCase() + " completada";
+        
         if(completadas.size === 3){
-          document.getElementById("popup-text").textContent="🌌 Mi universo está completo contigo. El Triángulo de Verano ahora brilla para nosotros. 💙";
+          setTimeout(() => {
+            document.getElementById("popup-text").textContent = "🌌 Todas las constelaciones están completas… y mi universo también contigo 💙";
+          }, 1000);
         }
       }, 500);
     }
   });
 });
 
+// Esta función dibuja la línea entre dos elementos
 function conectar(a,b){
   const r1=a.getBoundingClientRect();
   const r2=b.getBoundingClientRect();
@@ -192,7 +232,8 @@ function conectar(a,b){
   l.style.left=x1+"px";
   l.style.top=y1+"px";
   l.style.transform=`rotate(${ang}deg)`;
-  document.body.appendChild(l);
+  // Importante: colocar las líneas detrás de las estrellas para que no tapen el clic
+  document.body.insertBefore(l, document.querySelector('.estrella.especial'));
 }
 
 document.getElementById("popup").addEventListener("click",()=>document.getElementById("popup").classList.add("oculto"));
