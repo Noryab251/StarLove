@@ -2,256 +2,242 @@ index.html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Nuestro universo</title>
+<meta charset="UTF-8">
+<title>Nuestro universo</title>
 
-  <style>
-    /* Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Arial', sans-serif;
-    }
-
-    body {
-      height: 100vh;
-      background: radial-gradient(circle at bottom, #070b1f, #00010a);
-      overflow: hidden;
-      color: white;
-    }
-
-    /* Texto principal (arriba) */
-    .contenido {
-      position: absolute;
-      top: 40px;
-      width: 100%;
-      text-align: center;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    h1 {
-      font-size: 2.8rem;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 1.2rem;
-      opacity: 0.85;
-    }
-
-    /* Estrellas normales (fondo) */
-    .estrella {
-      position: absolute;
-      background: white;
-      border-radius: 50%;
-      opacity: 0.7;
-      animation: parpadeo 2s infinite alternate;
-    }
-
-    @keyframes parpadeo {
-      from { opacity: 0.3; }
-      to { opacity: 1; }
-    }
-
-    /* ⭐ Estrellas especiales (clickeables) */
-    .estrella.especial {
-  width: 7px;
-  height: 7px;
-  background: #e6f2ff;
-  border-radius: 50%;
-  position: absolute;
-  cursor: pointer;
-  z-index: 3;
-  box-shadow:
-    0 0 6px rgba(180,220,255,0.9),
-    0 0 12px rgba(120,180,255,0.6);
-  animation: latido 2.5s infinite ease-in-out;
-}
-@keyframes latido {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.9;
-  }
-  50% {
-    transform: scale(1.25);
-    opacity: 1;
-  }
-}
-    .estrella.especial:hover {
-      transform: scale(1.4);
-      box-shadow: 0 0 25px white;
-    }
-
-    .estrella.especial.activa {
-  background: #ffffff;
-  box-shadow:
-    0 0 10px #ffffff,
-    0 0 20px rgba(200,220,255,1);
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
 }
 
-
-    /* Líneas entre estrellas */
-    .linea {
-  position: absolute;
-  height: 1.2px;
-  background: rgba(200, 220, 255, 0.8);
-  transform-origin: 0 50%;
-  z-index: 2;
-  width: 0;
-  animation: dibujar 1s ease-out forwards;
-  box-shadow: 0 0 6px rgba(180,200,255,0.6);
+body{
+  height:100vh;
+  background:radial-gradient(circle at bottom,#070b1f,#00010a);
+  overflow:hidden;
+  color:white;
 }
 
-@keyframes dibujar {
-  from { width: 0; }
-  to { width: var(--longitud); }
+/* texto arriba */
+.contenido{
+  position:absolute;
+  top:40px;
+  width:100%;
+  text-align:center;
+  z-index:2;
+  pointer-events:none;
+}
+h1{font-size:2.8rem;margin-bottom:10px;}
+p{font-size:1.2rem;opacity:.85;}
+
+/* estrellas fondo */
+.estrella{
+  position:absolute;
+  background:white;
+  border-radius:50%;
+  opacity:.7;
+  animation:parpadeo 2s infinite alternate;
+}
+@keyframes parpadeo{
+  from{opacity:.3;}
+  to{opacity:1;}
 }
 
-@keyframes dibujar {
-  from {
-    width: 0;
-  }
-  to {
-    width: var(--longitud);
-  }
+/* estrellas especiales */
+.estrella.especial{
+  width:7px;
+  height:7px;
+  background:#e6f2ff;
+  border-radius:50%;
+  position:absolute;
+  cursor:pointer;
+  z-index:3;
+  box-shadow:0 0 6px rgba(180,220,255,.9),
+             0 0 12px rgba(120,180,255,.6);
+  animation:latido 2.5s infinite ease-in-out;
+}
+@keyframes latido{
+  0%,100%{transform:scale(1);opacity:.9;}
+  50%{transform:scale(1.25);opacity:1;}
+}
+.estrella.especial.activa{
+  background:#fff;
+  box-shadow:0 0 10px #fff,
+             0 0 20px rgba(200,220,255,1);
 }
 
+/* lineas */
+.linea{
+  position:absolute;
+  height:1.2px;
+  background:rgba(200,220,255,.8);
+  transform-origin:0 50%;
+  z-index:2;
+  width:0;
+  animation:dibujar 1s ease-out forwards;
+  box-shadow:0 0 6px rgba(180,200,255,.6);
+}
+@keyframes dibujar{
+  from{width:0;}
+  to{width:var(--longitud);}
+}
 
-    /* Popup */
-    .popup {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0,0,0,0.85);
-      padding: 22px 28px;
-      border-radius: 14px;
-      font-size: 1.2rem;
-      max-width: 80%;
-      text-align: center;
-      z-index: 10;
-      cursor: pointer;
-    }
-
-    .oculto {
-      display: none;
-    }
-  </style>
+/* popup */
+.popup{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:rgba(0,0,0,.85);
+  padding:22px 28px;
+  border-radius:14px;
+  font-size:1.2rem;
+  max-width:80%;
+  text-align:center;
+  z-index:10;
+  cursor:pointer;
+}
+.oculto{display:none;}
+</style>
 </head>
 
 <body>
 
-  <!-- Texto principal -->
-  <div class="contenido">
-    <h1>Nuestro universo ✨</h1>
-    <p>
-      Algo solo y único para ti.<br>
-      Poco a poco, estrella por estrella 💫
-    </p>
-  </div>
+<div class="contenido">
+  <h1>Nuestro universo ✨</h1>
+  <p>Algo solo y único para ti.<br>poco a poco, estrella por estrella 💫</p>
+</div>
 
-  <!-- ⭐ Estrellas especiales -->
-  <div class="estrella especial" style="top:35%; left:30%;" data-message="Desde que llegaste, mi universo cambió ✨"></div>
-  <div class="estrella especial" style="top:55%; left:50%;" data-message="Cada estrella me recuerda a ti 💫"></div>
-  <div class="estrella especial" style="top:40%; left:70%;" data-message="Eres mi lugar seguro en este infinito 💙"></div>
+<!-- 🦢 CISNE -->
+<div class="estrella especial" style="top:25%; left:50%;" data-const="cisne" data-message="El cisne guía mi camino 🦢"></div>
+<div class="estrella especial" style="top:35%; left:45%;" data-const="cisne" data-message="Contigo encuentro dirección"></div>
+<div class="estrella especial" style="top:45%; left:50%;" data-const="cisne" data-message="Mi centro eres tú"></div>
+<div class="estrella especial" style="top:55%; left:55%;" data-const="cisne" data-message="Siempre vuelvo a ti"></div>
+<div class="estrella especial" style="top:65%; left:50%;" data-const="cisne" data-message="Mi lugar seguro 💙"></div>
 
-  <!-- Popup -->
-  <div id="popup" class="popup oculto">
-    <p id="popup-text"></p>
-  </div>
+<!-- 🎵 LIRA -->
+<div class="estrella especial" style="top:25%; left:18%;" data-const="lira" data-message="Nuestra melodía empieza aquí 🎵"></div>
+<div class="estrella especial" style="top:35%; left:14%;" data-const="lira" data-message="Cada nota me recuerda a ti"></div>
+<div class="estrella especial" style="top:40%; left:24%;" data-const="lira" data-message="Todo suena mejor contigo"></div>
+<div class="estrella especial" style="top:50%; left:18%;" data-const="lira" data-message="Nuestra canción continúa"></div>
 
-  <script>
-/* Fondo de estrellas */
-const cantidad = 120;
-for (let i = 0; i < cantidad; i++) {
-  const estrella = document.createElement("div");
-  estrella.className = "estrella";
+<!-- 🦅 AGUILA -->
+<div class="estrella especial" style="top:30%; left:75%;" data-const="aguila" data-message="Volar es fácil contigo 🦅"></div>
+<div class="estrella especial" style="top:40%; left:70%;" data-const="aguila" data-message="Me haces sentir libre"></div>
+<div class="estrella especial" style="top:50%; left:78%;" data-const="aguila" data-message="Siempre regreso a ti"></div>
+<div class="estrella especial" style="top:60%; left:72%;" data-const="aguila" data-message="Mi cielo favorito eres tú"></div>
 
-  const size = Math.random() * 2 + 1;
-  estrella.style.width = size + "px";
-  estrella.style.height = size + "px";
-  estrella.style.top = Math.random() * 100 + "vh";
-  estrella.style.left = Math.random() * 100 + "vw";
-  estrella.style.animationDuration = (Math.random() * 3 + 1) + "s";
+<!-- popup -->
+<div id="popup" class="popup oculto">
+  <p id="popup-text"></p>
+</div>
 
-  document.body.appendChild(estrella);
+<script>
+/* fondo estrellas */
+for(let i=0;i<120;i++){
+  const e=document.createElement("div");
+  e.className="estrella";
+  const s=Math.random()*2+1;
+  e.style.width=s+"px";
+  e.style.height=s+"px";
+  e.style.top=Math.random()*100+"vh";
+  e.style.left=Math.random()*100+"vw";
+  e.style.animationDuration=(Math.random()*3+1)+"s";
+  document.body.appendChild(e);
 }
 
-/* Estrellas especiales */
-const especiales = document.querySelectorAll(".estrella.especial");
-const totalConstelacion = especiales.length;
+/* constelaciones */
+const especiales=document.querySelectorAll(".estrella.especial");
+const popup=document.getElementById("popup");
+const popupText=document.getElementById("popup-text");
 
-const popup = document.getElementById("popup");
-const popupText = document.getElementById("popup-text");
+let progreso={cisne:[],lira:[],aguila:[]};
+let completadas=new Set();
 
-let activadas = [];
+especiales.forEach(e=>{
+  e.addEventListener("click",()=>{
 
-especiales.forEach(e => {
-  e.addEventListener("click", () => {
+    if(e.classList.contains("activa")) return;
 
-    if (e.classList.contains("activa")) return;
+    const grupo=e.dataset.const;
+    e.classList.add("activa");
 
-    popupText.textContent = e.dataset.message;
+    popupText.textContent=e.dataset.message;
     popup.classList.remove("oculto");
 
-    e.classList.add("activa");
-    activadas.push(e);
+    progreso[grupo].push(e);
 
-    /* conecta con la anterior */
-    if (activadas.length > 1) {
-      conectar(activadas[activadas.length - 2], e);
+    if(progreso[grupo].length>1){
+      conectar(
+        progreso[grupo][progreso[grupo].length-2],
+        e
+      );
     }
 
-    /* cerrar constelación cuando estén todas */
-    if (activadas.length === totalConstelacion) {
-      setTimeout(() => {
-        conectar(activadas[activadas.length - 1], activadas[0]);
+    const total=document.querySelectorAll(`[data-const="${grupo}"]`).length;
 
-        setTimeout(() => {
-          popupText.textContent =
-            "✨ La constelación está completa… y también algo dentro de mí 💙";
+    if(progreso[grupo].length===total){
+
+      setTimeout(()=>{
+        conectar(
+          progreso[grupo][progreso[grupo].length-1],
+          progreso[grupo][0]
+        );
+
+        completadas.add(grupo);
+
+        setTimeout(()=>{
+          popupText.textContent=
+            "✨ Constelación "+grupo.toUpperCase()+" completada";
           popup.classList.remove("oculto");
-        }, 900);
 
-      }, 1000);
+          if(completadas.size===3){
+            setTimeout(()=>{
+              popupText.textContent=
+                "🌌 Todas las constelaciones están completas… y mi universo también contigo 💙";
+              popup.classList.remove("oculto");
+            },900);
+          }
+
+        },700);
+
+      },800);
     }
 
   });
 });
 
-popup.addEventListener("click", () => {
+popup.addEventListener("click",()=>{
   popup.classList.add("oculto");
 });
 
-/* función de conexión */
-function conectar(a, b) {
+/* líneas */
+function conectar(a,b){
+  const r1=a.getBoundingClientRect();
+  const r2=b.getBoundingClientRect();
 
-  const rect1 = a.getBoundingClientRect();
-  const rect2 = b.getBoundingClientRect();
+  const x1=r1.left+r1.width/2;
+  const y1=r1.top+r1.height/2;
+  const x2=r2.left+r2.width/2;
+  const y2=r2.top+r2.height/2;
 
-  const x1 = rect1.left + rect1.width / 2;
-  const y1 = rect1.top + rect1.height / 2;
-  const x2 = rect2.left + rect2.width / 2;
-  const y2 = rect2.top + rect2.height / 2;
+  const dx=x2-x1;
+  const dy=y2-y1;
+  const dist=Math.sqrt(dx*dx+dy*dy);
+  const ang=Math.atan2(dy,dx)*180/Math.PI;
 
-  const dx = x2 - x1;
-  const dy = y2 - y1;
-  const distancia = Math.sqrt(dx * dx + dy * dy);
-  const angulo = Math.atan2(dy, dx) * 180 / Math.PI;
+  const l=document.createElement("div");
+  l.className="linea";
+  l.style.setProperty("--longitud",dist+"px");
+  l.style.left=x1+"px";
+  l.style.top=y1+"px";
+  l.style.transform=`rotate(${ang}deg)`;
 
-  const linea = document.createElement("div");
-  linea.className = "linea";
-  linea.style.setProperty("--longitud", distancia + "px");
-  linea.style.left = x1 + "px";
-  linea.style.top = y1 + "px";
-  linea.style.transform = `rotate(${angulo}deg)`;
-
-  document.body.appendChild(linea);
+  document.body.appendChild(l);
 }
 </script>
-
 
 </body>
 </html>
