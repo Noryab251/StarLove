@@ -163,55 +163,71 @@ index.html
   </div>
 
   <script>
-    /* Fondo de estrellas */
-    const cantidad = 120;
-    for (let i = 0; i < cantidad; i++) {
-      const estrella = document.createElement("div");
-      estrella.className = "estrella";
-      const size = Math.random() * 2 + 1;
-      estrella.style.width = size + "px";
-      estrella.style.height = size + "px";
-      estrella.style.top = Math.random() * 100 + "vh";
-      estrella.style.left = Math.random() * 100 + "vw";
-      estrella.style.animationDuration = (Math.random() * 3 + 1) + "s";
-      document.body.appendChild(estrella);
+/* Fondo de estrellas */
+const cantidad = 120;
+for (let i = 0; i < cantidad; i++) {
+  const estrella = document.createElement("div");
+  estrella.className = "estrella";
+
+  const size = Math.random() * 2 + 1;
+  estrella.style.width = size + "px";
+  estrella.style.height = size + "px";
+  estrella.style.top = Math.random() * 100 + "vh";
+  estrella.style.left = Math.random() * 100 + "vw";
+  estrella.style.animationDuration = (Math.random() * 3 + 1) + "s";
+
+  document.body.appendChild(estrella);
+}
+
+/* Estrellas especiales */
+const especiales = document.querySelectorAll(".estrella.especial");
+const totalConstelacion = especiales.length;
+
+const popup = document.getElementById("popup");
+const popupText = document.getElementById("popup-text");
+
+let activadas = [];
+
+especiales.forEach(e => {
+  e.addEventListener("click", () => {
+
+    if (e.classList.contains("activa")) return;
+
+    popupText.textContent = e.dataset.message;
+    popup.classList.remove("oculto");
+
+    e.classList.add("activa");
+    activadas.push(e);
+
+    /* conecta con la anterior */
+    if (activadas.length > 1) {
+      conectar(activadas[activadas.length - 2], e);
     }
 
-    /* Estrellas especiales + conexiones */
-    const especiales = document.querySelectorAll(".estrella.especial");
-    const popup = document.getElementById("popup");
-    const popupText = document.getElementById("popup-text");
-    let activadas = [];
+    /* cerrar constelación cuando estén todas */
+    if (activadas.length === totalConstelacion) {
+      setTimeout(() => {
+        conectar(activadas[activadas.length - 1], activadas[0]);
 
-    especiales.forEach(e => {
-      e.addEventListener("click", () => {
-        if (e.classList.contains("activa")) return;
+        setTimeout(() => {
+          popupText.textContent =
+            "✨ La constelación está completa… y también algo dentro de mí 💙";
+          popup.classList.remove("oculto");
+        }, 900);
 
-        popupText.textContent = e.dataset.message;
-        popup.classList.remove("oculto");
-        e.classList.add("activa");
-        activadas.push(e);
+      }, 1000);
+    }
 
-// Conecta con la anterior
-if (activadas.length > 1) {
-  conectar(activadas[activadas.length - 2], e);
-}
+  });
+});
 
-// Si ya están todas, cierra la constelación
-if (activadas.length === totalConstelacion) {
-  setTimeout(() => {
-    conectar(activadas[activadas.length - 1], activadas[0]);
-  }, 1000); // mismo tiempo que la animación de la línea
-}
+popup.addEventListener("click", () => {
+  popup.classList.add("oculto");
+});
 
-      });
-    });
+/* función de conexión */
+function conectar(a, b) {
 
-    popup.addEventListener("click", () => {
-      popup.classList.add("oculto");
-    });
-
-    function conectar(a, b) {
   const rect1 = a.getBoundingClientRect();
   const rect2 = b.getBoundingClientRect();
 
@@ -234,9 +250,8 @@ if (activadas.length === totalConstelacion) {
 
   document.body.appendChild(linea);
 }
-const totalConstelacion = especiales.length;
+</script>
 
-  </script>
 
 </body>
 </html>
