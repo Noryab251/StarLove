@@ -4,23 +4,14 @@ index.html
 <head>
 <meta charset="UTF-8">
 <title>Nuestro universo</title>
-
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial,sans-serif;
-}
-
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
 body{
   height:100vh;
   background:radial-gradient(circle at bottom,#070b1f,#00010a);
   overflow:hidden;
   color:white;
 }
-
-/* texto arriba */
 .contenido{
   position:absolute;
   top:40px;
@@ -32,7 +23,6 @@ body{
 h1{font-size:2.8rem;margin-bottom:10px;}
 p{font-size:1.2rem;opacity:.85;}
 
-/* estrellas fondo */
 .estrella{
   position:absolute;
   background:white;
@@ -45,7 +35,6 @@ p{font-size:1.2rem;opacity:.85;}
   to{opacity:1;}
 }
 
-/* estrellas especiales */
 .estrella.especial{
   width:7px;
   height:7px;
@@ -64,11 +53,9 @@ p{font-size:1.2rem;opacity:.85;}
 }
 .estrella.especial.activa{
   background:#fff;
-  box-shadow:0 0 10px #fff,
-             0 0 20px rgba(200,220,255,1);
+  box-shadow:0 0 10px #fff,0 0 20px rgba(200,220,255,1);
 }
 
-/* lineas */
 .linea{
   position:absolute;
   height:1.2px;
@@ -84,7 +71,6 @@ p{font-size:1.2rem;opacity:.85;}
   to{width:var(--longitud);}
 }
 
-/* popup */
 .popup{
   position:fixed;
   top:50%;
@@ -110,27 +96,14 @@ p{font-size:1.2rem;opacity:.85;}
   <p>Algo solo y único para ti.<br>poco a poco, estrella por estrella 💫</p>
 </div>
 
-<!-- ⭐ Constelación del Cisne -->
-<div class="estrella especial" id="c1" style="top:25%; left:50%;"></div>
-<div class="estrella especial" id="c2" style="top:35%; left:50%;"></div>
-<div class="estrella especial" id="c3" style="top:45%; left:50%;"></div>
-<div class="estrella especial" id="c4" style="top:55%; left:50%;"></div>
-<div class="estrella especial" id="c5" style="top:65%; left:50%;"></div>
-<div class="estrella especial" id="c5" style="top:65%; left:50%;"></div>
-<div class="estrella especial" id="c6" style="top:45%; left:35%;"></div>
-<div class="estrella especial" id="c7" style="top:45%; left:65%;"></div>
-
-<!-- 🎵 LIRA -->
-<div class="estrella especial" style="top:25%; left:18%;" data-const="lira" data-message="Nuestra melodía empieza aquí 🎵"></div>
-<div class="estrella especial" style="top:35%; left:14%;" data-const="lira" data-message="Cada nota me recuerda a ti"></div>
-<div class="estrella especial" style="top:40%; left:24%;" data-const="lira" data-message="Todo suena mejor contigo"></div>
-<div class="estrella especial" style="top:50%; left:18%;" data-const="lira" data-message="Nuestra canción continúa"></div>
-
-<!-- 🦅 AGUILA -->
-<div class="estrella especial" style="top:30%; left:75%;" data-const="aguila" data-message="Volar es fácil contigo 🦅"></div>
-<div class="estrella especial" style="top:40%; left:70%;" data-const="aguila" data-message="Me haces sentir libre"></div>
-<div class="estrella especial" style="top:50%; left:78%;" data-const="aguila" data-message="Siempre regreso a ti"></div>
-<div class="estrella especial" style="top:60%; left:72%;" data-const="aguila" data-message="Mi cielo favorito eres tú"></div>
+<!-- 🦢 CONSTELACIÓN DEL CISNE (forma real tipo cruz) -->
+<div class="estrella especial" id="c1" data-const="cisne" style="top:20%; left:50%;"></div>
+<div class="estrella especial" id="c2" data-const="cisne" style="top:30%; left:50%;"></div>
+<div class="estrella especial" id="c3" data-const="cisne" style="top:40%; left:50%;"></div>
+<div class="estrella especial" id="c4" data-const="cisne" style="top:50%; left:50%;"></div>
+<div class="estrella especial" id="c5" data-const="cisne" style="top:60%; left:50%;"></div>
+<div class="estrella especial" id="c6" data-const="cisne" style="top:40%; left:35%;"></div>
+<div class="estrella especial" id="c7" data-const="cisne" style="top:40%; left:65%;"></div>
 
 <!-- popup -->
 <div id="popup" class="popup oculto">
@@ -151,27 +124,30 @@ for(let i=0;i<120;i++){
   document.body.appendChild(e);
 }
 
-<script>
-const conexionesCisne = [
-  ["c1","c2"],
-  ["c2","c3"],
-  ["c3","c4"],
-  ["c4","c5"],
-  ["c3","c6"],
-  ["c3","c7"]
+const popup=document.getElementById("popup");
+const popupText=document.getElementById("popup-text");
+
+let activadas=new Set();
+
+const conexionesCisne=[
+ ["c1","c2"],
+ ["c2","c3"],
+ ["c3","c4"],
+ ["c4","c5"],
+ ["c3","c6"],
+ ["c3","c7"]
 ];
 
-let activadas = new Set();
+document.querySelectorAll(".estrella.especial").forEach(e=>{
+  e.addEventListener("click",()=>{
 
-document.querySelectorAll(".estrella.especial").forEach(e => {
-  e.addEventListener("click", () => {
-    if (activadas.has(e.id)) return;
+    if(activadas.has(e.id)) return;
 
     activadas.add(e.id);
     e.classList.add("activa");
 
-    conexionesCisne.forEach(([a,b]) => {
-      if (activadas.has(a) && activadas.has(b)) {
+    conexionesCisne.forEach(([a,b])=>{
+      if(activadas.has(a) && activadas.has(b)){
         conectar(
           document.getElementById(a),
           document.getElementById(b)
@@ -179,18 +155,17 @@ document.querySelectorAll(".estrella.especial").forEach(e => {
       }
     });
 
-    if (activadas.size === conexionesCisne.length + 1) {
-      setTimeout(() => {
-        popupText.textContent =
-          "🦢 Has formado la constelación del Cisne";
+    if(activadas.size===7){
+      setTimeout(()=>{
+        popupText.textContent="🦢 Constelación del Cisne completada";
         popup.classList.remove("oculto");
-      }, 800);
+      },700);
     }
   });
 });
-  
-</script>
-/* líneas */
+
+popup.onclick=()=>popup.classList.add("oculto");
+
 function conectar(a,b){
   const r1=a.getBoundingClientRect();
   const r2=b.getBoundingClientRect();
