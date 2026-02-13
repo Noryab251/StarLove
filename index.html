@@ -123,18 +123,24 @@ p{font-size:1.2rem;opacity:.85;}
 }
 
 .texto-final{
-  margin-top:20vh;
-  font-size:2.4rem;
-  color:white;
-  text-shadow:
-    0 0 10px #9ed0ff,
-    0 0 25px #9ed0ff;
+  margin-top:10vh;
+  width:70%;
+  margin-left:auto;
+  margin-right:auto;
+  font-size:1.4rem;
+  line-height:1.8;
+  text-align:center;
+
   opacity:0;
-  transition:opacity 2s ease;
+  transform:translateY(20px);
+  transition:
+    opacity 3s ease,
+    transform 3s ease;
 }
 
 .texto-final.mostrar{
   opacity:1;
+  transform:translateY(0);
 }
 
 .personas{
@@ -206,8 +212,14 @@ p{font-size:1.2rem;opacity:.85;}
 <!-- Escena final -->
 <div id="escena-final" class="escena-final">
   <div class="texto-final">
-    Todo este universo…<br>
-    siempre estuvo apuntando hacia ti 💙
+  Gracias por cada momento contigo.<br><br>
+  Eres la persona que convirtió algo simple en algo mágico.<br><br>
+  Gracias por tu sonrisa, por tu paciencia y por existir en mi cielo.<br><br>
+  Quiero seguir descubriendo estrellas contigo,<br>
+  seguir perdiéndome en este universo y encontrarte siempre.<br><br>
+  Eres mi lugar favorito incluso en el infinito 💙
+</div>
+
   </div>
 
   <div class="personas">👫</div>
@@ -223,7 +235,7 @@ for(let i=0;i<140;i++){
   const s=Math.random()*2+1;
   e.style.width=s+"px";
   e.style.height=s+"px";
-  e.style.top=Math.random()*100+"vh";
+  e.style.top=Math.random()*300+"vh";
   e.style.left=Math.random()*100+"vw";
   e.style.animationDuration=(Math.random()*3+1)+"s";
   document.body.appendChild(e);
@@ -332,6 +344,12 @@ setTimeout(()=>{
     setTimeout(()=>{
       mensajeFinal.classList.add("mostrar");
     },50);
+    
+    setTimeout(()=>{
+  mensajeFinal.classList.remove("mostrar");
+  mensajeFinal.classList.add("oculto");
+},2500);
+
 
     /* después baja la pantalla */
     setTimeout(()=>{
@@ -340,7 +358,7 @@ setTimeout(()=>{
   function bajarSuave(){
   let inicio = window.scrollY;
   let destino = window.innerHeight * 2; // baja más lejos
-  let duracion = 9000; // 9 segundos (lento)
+  let duracion = 16000;
   let inicioTiempo = null;
 
   function animar(t){
