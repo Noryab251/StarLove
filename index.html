@@ -80,6 +80,20 @@ p{font-size:1.2rem;opacity:.85;}
   cursor:pointer;
 }
 .oculto{display:none;}
+  /* brillo extra al completar constelación */
+.completa {
+  box-shadow:
+    0 0 15px #ffffff,
+    0 0 30px #9ed0ff,
+    0 0 50px #9ed0ff;
+  animation: brilloFinal 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes brilloFinal {
+  from { transform: scale(1.1); }
+  to   { transform: scale(1.35); }
+}
+
 </style>
 </head>
 <body>
