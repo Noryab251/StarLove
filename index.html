@@ -10,11 +10,11 @@ index.html
 body{
   min-height:300vh;
   background:radial-gradient(circle at bottom,#070b1f,#00010a);
-  color:white;
   overflow-x:hidden;
+  color:white;
 }
 
-/* texto arriba */
+/* texto */
 .contenido{
   position:absolute;
   top:40px;
@@ -36,7 +36,7 @@ p{font-size:1.2rem;opacity:.85;}
 }
 @keyframes parpadeo{from{opacity:.3;}to{opacity:1;}}
 
-/* estrellas especiales */
+/* estrellas clickeables */
 .estrella.especial{
   width:7px;height:7px;
   background:#e6f2ff;
@@ -54,11 +54,6 @@ p{font-size:1.2rem;opacity:.85;}
 .estrella.especial.activa{
   background:#fff;
   box-shadow:0 0 12px #fff;
-}
-
-/* brillo constelación completa */
-.completa{
-  box-shadow:0 0 20px #9ed0ff,0 0 40px #9ed0ff;
 }
 
 /* líneas */
@@ -81,11 +76,16 @@ p{font-size:1.2rem;opacity:.85;}
   top:50%;left:50%;
   transform:translate(-50%,-50%);
   background:rgba(0,0,0,.85);
-  padding:20px;
-  border-radius:12px;
-  z-index:20;
+  padding:22px;
+  border-radius:14px;
+  z-index:10;
 }
 .oculto{display:none;}
+
+/* completadas */
+.completa{
+  box-shadow:0 0 20px #9ed0ff,0 0 40px #9ed0ff;
+}
 
 /* mensaje final */
 .mensaje-final{
@@ -96,7 +96,7 @@ p{font-size:1.2rem;opacity:.85;}
   font-size:2rem;
   opacity:0;
   transition:opacity 1.5s;
-  z-index:25;
+  z-index:20;
 }
 .mensaje-final.mostrar{opacity:1;}
 
@@ -105,7 +105,6 @@ p{font-size:1.2rem;opacity:.85;}
   position:absolute;
   top:120vh;
   width:100%;
-  height:100vh;
   text-align:center;
 }
 .texto-final{
@@ -115,6 +114,7 @@ p{font-size:1.2rem;opacity:.85;}
   transition:opacity 2s;
 }
 .texto-final.mostrar{opacity:1;}
+
 .personas{
   position:absolute;
   bottom:40px;
@@ -122,7 +122,7 @@ p{font-size:1.2rem;opacity:.85;}
   font-size:3rem;
 }
 
-/* pasto */
+/* pasto final */
 .pasto{
   position:absolute;
   top:260vh;
@@ -132,7 +132,6 @@ p{font-size:1.2rem;opacity:.85;}
 }
 </style>
 </head>
-
 <body>
 
 <div class="contenido">
@@ -140,7 +139,7 @@ p{font-size:1.2rem;opacity:.85;}
   <p>Algo solo y único para ti.<br>Poco a poco, estrella por estrella 💫</p>
 </div>
 
-<!-- estrellas (las tuyas, sin tocar) -->
+<!-- ⭐ TODAS TUS ESTRELLAS (sin cambiar) -->
 <div class="estrella especial" id="l1" style="top:18%;left:50%;" data-message="Tu luz siempre destaca ✨"></div>
 <div class="estrella especial" id="l2" style="top:26%;left:47%;" data-message="Todo vibra contigo"></div>
 <div class="estrella especial" id="l3" style="top:26%;left:53%;" data-message="Nuestra melodía sigue"></div>
@@ -151,10 +150,22 @@ p{font-size:1.2rem;opacity:.85;}
 <div class="estrella especial" id="c2" style="top:44%;left:18%;" data-message="Siempre vuelvo a ti"></div>
 <div class="estrella especial" id="c3" style="top:36%;left:14%;" data-message="Incluso lejos, te siento cerca"></div>
 <div class="estrella especial" id="c4" style="top:28%;left:11%;" data-message="Tu luz me guía"></div>
+<div class="estrella especial" id="c5" style="top:60%;left:24%;" data-message="Nuestro camino continúa"></div>
+<div class="estrella especial" id="c6" style="top:68%;left:24%;" data-message="Mi lugar seguro"></div>
+<div class="estrella especial" id="c7" style="top:52%;left:12%;" data-message="Tus alas me abrazan"></div>
+<div class="estrella especial" id="c8" style="top:52%;left:32%;" data-message="Siempre me encuentras"></div>
+<div class="estrella especial" id="c9" style="top:52%;left:40%;" data-message="Todo se conecta"></div>
+<div class="estrella especial" id="c10" style="top:52%;left:48%;" data-message="Mi universo eres tú"></div>
 
 <div class="estrella especial" id="a1" style="top:52%;left:78%;" data-message="Contigo vuelo más alto 🦅"></div>
 <div class="estrella especial" id="a2" style="top:44%;left:80%;" data-message="Me haces sentir libre"></div>
 <div class="estrella especial" id="a3" style="top:40%;left:84%;" data-message="Tu luz me guía"></div>
+<div class="estrella especial" id="a4" style="top:58%;left:72%;" data-message="Siempre regreso"></div>
+<div class="estrella especial" id="a5" style="top:64%;left:66%;" data-message="Mi cielo favorito eres tú"></div>
+<div class="estrella especial" id="a6" style="top:58%;left:84%;" data-message="Tus alas me cuidan"></div>
+<div class="estrella especial" id="a7" style="top:64%;left:90%;" data-message="Eres mi destino"></div>
+<div class="estrella especial" id="a8" style="top:50%;left:70%;" data-message="Siempre contigo"></div>
+<div class="estrella especial" id="a9" style="top:50%;left:86%;" data-message="Siempre aquí"></div>
 
 <div id="popup" class="popup oculto"><p id="popup-text"></p></div>
 
@@ -162,7 +173,7 @@ p{font-size:1.2rem;opacity:.85;}
 🌌 Gracias por recorrer este universo conmigo 💙
 </div>
 
-<div id="escena-final" class="escena-final">
+<div class="escena-final">
   <div class="texto-final">Todo este universo…<br>siempre estuvo apuntando hacia ti 💙</div>
   <div class="personas">👫</div>
 </div>
@@ -172,7 +183,7 @@ p{font-size:1.2rem;opacity:.85;}
 <script>
 window.onload=()=>window.scrollTo(0,0);
 
-/* fondo estrellas */
+/* estrellas fondo */
 for(let i=0;i<180;i++){
   const e=document.createElement("div");
   e.className="estrella";
@@ -191,25 +202,64 @@ const textoFinal=document.querySelector(".texto-final");
 
 let tocadas=new Set();
 
-/* clicks */
+/* CLICK */
 document.querySelectorAll(".estrella.especial").forEach(e=>{
   e.addEventListener("click",()=>{
     if(tocadas.has(e.id)) return;
-    tocadas.add(e.id);
 
+    tocadas.add(e.id);
     e.classList.add("activa");
+
     popupText.textContent=e.dataset.message;
     popup.classList.remove("oculto");
-
     setTimeout(()=>popup.classList.add("oculto"),2000);
 
-    if(tocadas.size===12){
+    revisarConexiones();
+
+    if(tocadas.size===24){
       finalizar();
     }
   });
 });
 
-/* final */
+/* conexiones reales */
+const conexiones=[["l2","l3"],["l3","l4"],["l4","l5"],["l5","l2"],["l1","l3"],
+["c1","c2"],["c2","c3"],["c3","c4"],["c1","c5"],["c5","c6"],["c1","c7"],["c1","c8"],["c8","c9"],["c9","c10"],
+["a1","a2"],["a2","a3"],["a1","a4"],["a4","a5"],["a1","a6"],["a6","a7"],["a1","a8"],["a1","a9"]];
+
+let hechas=new Set();
+
+function revisarConexiones(){
+  conexiones.forEach(([a,b])=>{
+    const key=[a,b].sort().join("-");
+    if(tocadas.has(a)&&tocadas.has(b)&&!hechas.has(key)){
+      hechas.add(key);
+      conectar(document.getElementById(a),document.getElementById(b));
+    }
+  });
+}
+
+function conectar(a,b){
+  const r1=a.getBoundingClientRect();
+  const r2=b.getBoundingClientRect();
+  const x1=r1.left+r1.width/2;
+  const y1=r1.top+r1.height/2;
+  const x2=r2.left+r2.width/2;
+  const y2=r2.top+r2.height/2;
+  const dx=x2-x1, dy=y2-y1;
+  const dist=Math.sqrt(dx*dx+dy*dy);
+  const ang=Math.atan2(dy,dx)*180/Math.PI;
+
+  const l=document.createElement("div");
+  l.className="linea";
+  l.style.setProperty("--longitud",dist+"px");
+  l.style.left=x1+"px";
+  l.style.top=y1+"px";
+  l.style.transform=`rotate(${ang}deg)`;
+  document.body.appendChild(l);
+}
+
+/* FINAL */
 function finalizar(){
   setTimeout(()=>{
     mensajeFinal.classList.remove("oculto");
@@ -219,11 +269,9 @@ function finalizar(){
       bajarSuave();
       setTimeout(()=>textoFinal.classList.add("mostrar"),1200);
     },3000);
-
   },1500);
 }
 
-/* scroll lento */
 function bajarSuave(){
   const inicio=window.scrollY;
   const destino=window.innerHeight*2;
@@ -234,11 +282,10 @@ function bajarSuave(){
     if(!t0)t0=t;
     const p=Math.min((t-t0)/duracion,1);
     window.scrollTo(0,inicio+(destino-inicio)*p);
-    if(p<1) requestAnimationFrame(animar);
+    if(p<1)requestAnimationFrame(animar);
   }
   requestAnimationFrame(animar);
 }
 </script>
-
 </body>
 </html>
