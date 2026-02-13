@@ -93,6 +93,25 @@ p{font-size:1.2rem;opacity:.85;}
   from { transform: scale(1.1); }
   to   { transform: scale(1.35); }
 }
+.mensaje-final{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:2rem;
+  text-align:center;
+  color:#ffffff;
+  text-shadow:
+    0 0 10px #9ed0ff,
+    0 0 25px #9ed0ff;
+  z-index:20;
+  opacity:0;
+  transition:opacity 1.5s ease;
+}
+
+.mensaje-final.mostrar{
+  opacity:1;
+}
 
 </style>
 </head>
@@ -140,6 +159,10 @@ p{font-size:1.2rem;opacity:.85;}
 <div id="popup" class="popup oculto">
   <p id="popup-text"></p>
 </div>
+<!-- Mensaje final en el cielo -->
+<div id="mensaje-final" class="mensaje-final oculto">
+  🌌 Gracias por recorrer este universo conmigo 💙
+</div>
 
 <script>
 /* fondo estrellas */
@@ -157,6 +180,7 @@ for(let i=0;i<140;i++){
 
 const popup=document.getElementById("popup");
 const popupText=document.getElementById("popup-text");
+const mensajeFinal = document.getElementById("mensaje-final");
 
 /* conexiones */
 const conexiones=[
@@ -243,12 +267,17 @@ function revisarCompletadas(){
   });
 
   /* mensaje final */
-  if(completadas.size===3){
+ if(completadas.size===3){
+  setTimeout(()=>{
+
+    popup.classList.add("oculto");
+
+    mensajeFinal.classList.remove("oculto");
     setTimeout(()=>{
-      popupText.textContent="🌌 Todas las constelaciones están completas… y también mi universo contigo 💫";
-      popup.classList.remove("oculto");
-    }, 3000);
-  }
+      mensajeFinal.classList.add("mostrar");
+    },50);
+
+  },3000);
 }
 
 /* línea animada */
