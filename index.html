@@ -7,7 +7,8 @@ index.html
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
 body{
-  height:100vh;
+  body{
+  min-height:300vh;
   background:radial-gradient(circle at bottom,#070b1f,#00010a);
   overflow:hidden;
   color:white;
@@ -144,6 +145,14 @@ p{font-size:1.2rem;opacity:.85;}
   font-size:3rem;
   opacity:0.9;
 }
+.pasto{
+  position:absolute;
+  top:260vh;
+  width:100%;
+  height:40vh;
+  background:linear-gradient(to top,#0f3d1a,#1f6a2b);
+  z-index:1;
+}
 
 </style>
 </head>
@@ -205,6 +214,8 @@ p{font-size:1.2rem;opacity:.85;}
   <div class="personas">👫</div>
 </div>
 
+  <div class="pasto"></div> 
+  
 <script>
 /* fondo estrellas */
 for(let i=0;i<140;i++){
@@ -305,7 +316,11 @@ function revisarCompletadas(){
       if(nombre==="aquila")
         popupText.textContent="🦅 Aquila completa… volamos juntos más alto";
 
-      popup.classList.remove("oculto");
+        popup.classList.remove("oculto");
+
+        setTimeout(()=>{
+         popup.classList.add("oculto");
+        },2000);
     }
   });
 
@@ -321,12 +336,28 @@ function revisarCompletadas(){
 
     /* después baja la pantalla */
     setTimeout(()=>{
+    bajarSuave();
+     function bajarSuave(){
+  let inicio = window.scrollY;
+  let destino = window.innerHeight * 2; // baja más lejos
+  let duracion = 9000; // 9 segundos (lento)
+  let inicioTiempo = null;
 
-      window.scrollTo({
-        top: window.innerHeight,
-        behavior: "smooth"
-      });
+  function animar(t){
+    if(!inicioTiempo) inicioTiempo = t;
+    const progreso = t - inicioTiempo;
+    const p = Math.min(progreso / duracion, 1);
 
+    window.scrollTo(0, inicio + (destino - inicio) * p);
+
+    if(p < 1){
+      requestAnimationFrame(animar);
+    }
+  }
+
+  requestAnimationFrame(animar);
+}
+      
       setTimeout(()=>{
         textoFinal.classList.add("mostrar");
       },1200);
