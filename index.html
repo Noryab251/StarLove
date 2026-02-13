@@ -7,7 +7,6 @@ index.html
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
 body{
-  body{
   min-height:300vh;
   background:radial-gradient(circle at bottom,#070b1f,#00010a);
   overflow:hidden;
@@ -313,10 +312,14 @@ function revisarCompletadas(){
       if(nombre==="cygnus")
         popupText.textContent="🦢 Cygnus completo… el cisne guía nuestro universo 💙";
 
-      if(nombre==="aquila")
-        popupText.textContent="🦅 Aquila completa… volamos juntos más alto";
+      if(nombre==="aquila"){
+  popupText.textContent="🦅 Aquila completa… volamos juntos más alto";
+}
 
-        popup.classList.remove("oculto");
+popup.classList.remove("oculto");
+setTimeout(()=>{
+  popup.classList.add("oculto");
+},2000);
 
         setTimeout(()=>{
          popup.classList.add("oculto");
@@ -337,7 +340,6 @@ function revisarCompletadas(){
     /* después baja la pantalla */
     setTimeout(()=>{
     bajarSuave();
-     function bajarSuave(){
   let inicio = window.scrollY;
   let destino = window.innerHeight * 2; // baja más lejos
   let duracion = 9000; // 9 segundos (lento)
@@ -367,7 +369,7 @@ function revisarCompletadas(){
   },3000);
  }
 }
-
+function bajarSuave(){
 /* línea animada */
 function conectar(a,b){
   const r1=a.getBoundingClientRect();
