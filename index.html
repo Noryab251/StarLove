@@ -128,7 +128,7 @@ p{font-size:1.2rem;opacity:.85;}
 </div>
 
 <script>
-/* estrellas fondo */
+/* fondo estrellas */
 for(let i=0;i<140;i++){
   const e=document.createElement("div");
   e.className="estrella";
@@ -144,7 +144,7 @@ for(let i=0;i<140;i++){
 const popup=document.getElementById("popup");
 const popupText=document.getElementById("popup-text");
 
-/* CONEXIONES */
+/* conexiones */
 const conexiones=[
 
   // LYRA
@@ -163,11 +163,20 @@ const conexiones=[
   ["a1","a8"],["a1","a9"]
 ];
 
+/* grupos */
+const grupos = {
+  lyra: ["l1","l2","l3","l4","l5"],
+  cygnus: ["c1","c2","c3","c4","c5","c6","c7","c8","c9","c10"],
+  aquila: ["a1","a2","a3","a4","a5","a6","a7","a8","a9"]
+};
+
+let completadas = new Set();
 let tocadas=new Set();
 let lineas=new Set();
 
 document.querySelectorAll(".estrella.especial").forEach(e=>{
   e.addEventListener("click",()=>{
+
     if(tocadas.has(e.id)) return;
 
     tocadas.add(e.id);
@@ -183,11 +192,52 @@ document.querySelectorAll(".estrella.especial").forEach(e=>{
         conectar(document.getElementById(a),document.getElementById(b));
       }
     });
+
+    revisarCompletadas();
   });
 });
 
 popup.onclick=()=>popup.classList.add("oculto");
 
+/* detectar constelaciones completas */
+function revisarCompletadas(){
+
+  Object.entries(grupos).forEach(([nombre, estrellas])=>{
+
+    if(completadas.has(nombre)) return;
+
+    const listaCompleta = estrellas.every(id => tocadas.has(id));
+
+    if(listaCompleta){
+      completadas.add(nombre);
+
+      estrellas.forEach(id=>{
+        document.getElementById(id).classList.add("completa");
+      });
+
+      if(nombre==="lyra")
+        popupText.textContent="🎵 Lyra completa… nuestra melodía ya está en el cielo ✨";
+
+      if(nombre==="cygnus")
+        popupText.textContent="🦢 Cygnus completo… el cisne guía nuestro universo 💙";
+
+      if(nombre==="aquila")
+        popupText.textContent="🦅 Aquila completa… volamos juntos más alto";
+
+      popup.classList.remove("oculto");
+    }
+  });
+
+  /* mensaje final */
+  if(completadas.size===3){
+    setTimeout(()=>{
+      popupText.textContent="🌌 Todas las constelaciones están completas… y también mi universo contigo 💫";
+      popup.classList.remove("oculto");
+    },800);
+  }
+}
+
+/* línea animada */
 function conectar(a,b){
   const r1=a.getBoundingClientRect();
   const r2=b.getBoundingClientRect();
@@ -207,7 +257,6 @@ function conectar(a,b){
   l.style.left=x1+"px";
   l.style.top=y1+"px";
   l.style.transform=`rotate(${ang}deg)`;
-
   document.body.appendChild(l);
 }
 </script>
