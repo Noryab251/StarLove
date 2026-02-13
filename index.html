@@ -124,7 +124,8 @@ p{font-size:1.2rem;opacity:.85;}
 
 .texto-final{
   margin-top:10vh;
-  width:70%;
+  width:75%;
+  max-width:800px;
   margin-left:auto;
   margin-right:auto;
   font-size:1.4rem;
@@ -228,6 +229,10 @@ p{font-size:1.2rem;opacity:.85;}
   <div class="pasto"></div> 
   
 <script>
+window.onload = () => {
+  window.scrollTo(0,0);
+};
+
 /* fondo estrellas */
 for(let i=0;i<140;i++){
   const e=document.createElement("div");
@@ -357,8 +362,8 @@ setTimeout(()=>{
       
   function bajarSuave(){
   let inicio = window.scrollY;
-  let destino = window.innerHeight * 2; // baja más lejos
-  let duracion = 16000;
+  let destino = window.innerHeight * 3; // baja más lejos
+  let duracion = 20000;
   let inicioTiempo = null;
 
   function animar(t){
