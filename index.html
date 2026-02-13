@@ -221,8 +221,6 @@ p{font-size:1.2rem;opacity:.85;}
   Eres mi lugar favorito incluso en el infinito 💙
 </div>
 
-  </div>
-
   <div class="personas">👫</div>
 </div>
 
@@ -342,20 +340,28 @@ setTimeout(()=>{
 
  if(completadas.size===3){
   document.body.style.overflow = "hidden";
+
+setTimeout(()=>{
+  popup.classList.add("oculto");
+
+  mensajeFinal.classList.remove("oculto");
+  setTimeout(()=>mensajeFinal.classList.add("mostrar"),50);
+
   setTimeout(()=>{
+    mensajeFinal.classList.remove("mostrar");
+    mensajeFinal.classList.add("oculto");
+  },2500);
 
-    popup.classList.add("oculto");
+  setTimeout(()=>{
+    bajarSuave();
 
-    mensajeFinal.classList.remove("oculto");
     setTimeout(()=>{
-      mensajeFinal.classList.add("mostrar");
-    },50);
-    
-    setTimeout(()=>{
-  mensajeFinal.classList.remove("mostrar");
-  mensajeFinal.classList.add("oculto");
-},2500);
+      textoFinal.classList.add("mostrar");
+    },1200);
 
+  },3000);
+
+},3000);
 
     /* después baja la pantalla */
     setTimeout(()=>{
@@ -379,9 +385,6 @@ setTimeout(()=>{
     } else {
      document.body.style.overflowY = "auto";
   }
-
-  requestAnimationFrame(animar);
-}
       
       setTimeout(()=>{
         textoFinal.classList.add("mostrar");
