@@ -30,10 +30,7 @@ p{font-size:1.2rem;opacity:.85;}
   opacity:.7;
   animation:parpadeo 2s infinite alternate;
 }
-@keyframes parpadeo{
-  from{opacity:.3;}
-  to{opacity:1;}
-}
+@keyframes parpadeo{from{opacity:.3;}to{opacity:1;}}
 
 .estrella.especial{
   width:7px;height:7px;
@@ -85,6 +82,7 @@ p{font-size:1.2rem;opacity:.85;}
 .oculto{display:none;}
 </style>
 </head>
+
 <body>
 
 <div class="contenido">
@@ -92,25 +90,28 @@ p{font-size:1.2rem;opacity:.85;}
   <p>Algo solo y único para ti.<br>Poco a poco, estrella por estrella 💫</p>
 </div>
 
-<!-- 🎵 LIRA (arriba) -->
-<div class="estrella especial" id="l1" style="top:18%; left:50%;" data-message="Tu luz siempre destaca ✨"></div>
-<div class="estrella especial" id="l2" style="top:24%; left:46%;" data-message="Todo suena mejor contigo"></div>
-<div class="estrella especial" id="l3" style="top:24%; left:54%;" data-message="Nuestra melodía sigue"></div>
-<div class="estrella especial" id="l4" style="top:30%; left:50%;" data-message="Eres mi canción favorita 🎵"></div>
+<!-- 🎵 LIRA (arriba, alrededor de Vega) -->
+<div class="estrella especial" id="l1" style="top:18%;left:50%;" data-message="Tu luz siempre destaca ✨"></div>
+<div class="estrella especial" id="l2" style="top:23%;left:46%;" data-message="Todo suena mejor contigo"></div>
+<div class="estrella especial" id="l3" style="top:23%;left:54%;" data-message="Nuestra melodía sigue"></div>
+<div class="estrella especial" id="l4" style="top:28%;left:44%;" data-message="Cada nota me recuerda a ti"></div>
+<div class="estrella especial" id="l5" style="top:28%;left:56%;" data-message="Eres mi canción favorita 🎵"></div>
 
-<!-- 🦢 CISNE (izquierda) -->
-<div class="estrella especial" id="c1" style="top:45%; left:32%;" data-message="Eres mi centro 💙"></div>
-<div class="estrella especial" id="c2" style="top:38%; left:26%;" data-message="Siempre vuelvo a ti"></div>
-<div class="estrella especial" id="c3" style="top:34%; left:20%;" data-message="Incluso lejos, estás aquí"></div>
-<div class="estrella especial" id="c4" style="top:52%; left:26%;" data-message="Mi camino siempre te encuentra"></div>
-<div class="estrella especial" id="c5" style="top:58%; left:20%;" data-message="Mi lugar seguro"></div>
+<!-- 🦢 CISNE (izquierda, más realista) -->
+<div class="estrella especial" id="c1" style="top:40%;left:36%;" data-message="Eres el centro de mi universo 💙"></div>
+<div class="estrella especial" id="c2" style="top:34%;left:30%;" data-message="Siempre vuelvo a ti"></div>
+<div class="estrella especial" id="c3" style="top:29%;left:24%;" data-message="Incluso lejos, te siento cerca"></div>
+<div class="estrella especial" id="c4" style="top:25%;left:18%;" data-message="Tu luz guía mi camino"></div>
+<div class="estrella especial" id="c5" style="top:46%;left:42%;" data-message="Todo se conecta contigo"></div>
+<div class="estrella especial" id="c6" style="top:52%;left:48%;" data-message="Mi lugar seguro"></div>
+<div class="estrella especial" id="c7" style="top:58%;left:54%;" data-message="Siempre regreso"></div>
 
 <!-- 🦅 ÁGUILA (derecha) -->
-<div class="estrella especial" id="a1" style="top:45%; left:68%;" data-message="Contigo vuelo más alto 🦅"></div>
-<div class="estrella especial" id="a2" style="top:38%; left:74%;" data-message="Me haces sentir libre"></div>
-<div class="estrella especial" id="a3" style="top:34%; left:80%;" data-message="Tu luz me guía"></div>
-<div class="estrella especial" id="a4" style="top:52%; left:74%;" data-message="Siempre regreso"></div>
-<div class="estrella especial" id="a5" style="top:58%; left:80%;" data-message="Mi cielo favorito eres tú"></div>
+<div class="estrella especial" id="a1" style="top:40%;left:64%;" data-message="Contigo vuelo más alto 🦅"></div>
+<div class="estrella especial" id="a2" style="top:34%;left:70%;" data-message="Me haces sentir libre"></div>
+<div class="estrella especial" id="a3" style="top:30%;left:76%;" data-message="Tu luz me guía"></div>
+<div class="estrella especial" id="a4" style="top:46%;left:70%;" data-message="Siempre regreso a ti"></div>
+<div class="estrella especial" id="a5" style="top:52%;left:76%;" data-message="Mi cielo favorito eres tú"></div>
 
 <div id="popup" class="popup oculto">
   <p id="popup-text"></p>
@@ -118,11 +119,12 @@ p{font-size:1.2rem;opacity:.85;}
 
 <script>
 /* fondo */
-for(let i=0;i<120;i++){
+for(let i=0;i<140;i++){
   const e=document.createElement("div");
   e.className="estrella";
   const s=Math.random()*2+1;
-  e.style.width=s+"px"; e.style.height=s+"px";
+  e.style.width=s+"px";
+  e.style.height=s+"px";
   e.style.top=Math.random()*100+"vh";
   e.style.left=Math.random()*100+"vw";
   e.style.animationDuration=(Math.random()*3+1)+"s";
@@ -132,12 +134,17 @@ for(let i=0;i<120;i++){
 const popup=document.getElementById("popup");
 const popupText=document.getElementById("popup-text");
 
+/* conexiones reales simplificadas */
 const conexiones=[
-  ["l1","l2"],["l1","l3"],["l2","l4"],["l3","l4"], // Lira
+  // Lira
+  ["l1","l2"],["l1","l3"],["l2","l4"],["l3","l5"],["l4","l5"],
 
-  ["c1","c2"],["c2","c3"],["c1","c4"],["c4","c5"], // Cisne simplificado
+  // Cisne
+  ["c1","c2"],["c2","c3"],["c3","c4"],
+  ["c1","c5"],["c5","c6"],["c6","c7"],
 
-  ["a1","a2"],["a2","a3"],["a1","a4"],["a4","a5"]  // Águila simplificada
+  // Águila
+  ["a1","a2"],["a2","a3"],["a1","a4"],["a4","a5"]
 ];
 
 let tocadas=new Set();
@@ -145,7 +152,6 @@ let lineas=new Set();
 
 document.querySelectorAll(".estrella.especial").forEach(e=>{
   e.addEventListener("click",()=>{
-
     if(tocadas.has(e.id)) return;
 
     tocadas.add(e.id);
