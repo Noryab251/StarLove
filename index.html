@@ -112,6 +112,38 @@ p{font-size:1.2rem;opacity:.85;}
 .mensaje-final.mostrar{
   opacity:1;
 }
+/* escena final */
+.escena-final{
+  position:absolute;
+  top:120vh; /* empieza fuera de pantalla */
+  width:100%;
+  height:100vh;
+  text-align:center;
+  z-index:5;
+}
+
+.texto-final{
+  margin-top:20vh;
+  font-size:2.4rem;
+  color:white;
+  text-shadow:
+    0 0 10px #9ed0ff,
+    0 0 25px #9ed0ff;
+  opacity:0;
+  transition:opacity 2s ease;
+}
+
+.texto-final.mostrar{
+  opacity:1;
+}
+
+.personas{
+  position:absolute;
+  bottom:40px;
+  width:100%;
+  font-size:3rem;
+  opacity:0.9;
+}
 
 </style>
 </head>
@@ -163,6 +195,15 @@ p{font-size:1.2rem;opacity:.85;}
 <div id="mensaje-final" class="mensaje-final oculto">
   🌌 Gracias por recorrer este universo conmigo 💙
 </div>
+<!-- Escena final -->
+<div id="escena-final" class="escena-final">
+  <div class="texto-final">
+    Todo este universo…<br>
+    siempre estuvo apuntando hacia ti 💙
+  </div>
+
+  <div class="personas">👫</div>
+</div>
 
 <script>
 /* fondo estrellas */
@@ -181,6 +222,8 @@ for(let i=0;i<140;i++){
 const popup=document.getElementById("popup");
 const popupText=document.getElementById("popup-text");
 const mensajeFinal = document.getElementById("mensaje-final");
+const escenaFinal = document.getElementById("escena-final");
+const textoFinal = document.querySelector(".texto-final");
 
 /* conexiones */
 const conexiones=[
@@ -266,7 +309,6 @@ function revisarCompletadas(){
     }
   });
 
-  /* mensaje final */
  if(completadas.size===3){
   setTimeout(()=>{
 
@@ -277,8 +319,21 @@ function revisarCompletadas(){
       mensajeFinal.classList.add("mostrar");
     },50);
 
+    /* después baja la pantalla */
+    setTimeout(()=>{
+
+      window.scrollTo({
+        top: window.innerHeight,
+        behavior: "smooth"
+      });
+
+      setTimeout(()=>{
+        textoFinal.classList.add("mostrar");
+      },1200);
+
+    },3000);
+
   },3000);
- }
 }
 
 /* línea animada */
