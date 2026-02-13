@@ -97,30 +97,35 @@ p{font-size:1.2rem;opacity:.85;}
 <div class="estrella especial" id="l5" style="top:34%;left:46%;" data-message="Eres mi canción favorita 🎵"></div>
 
 <!-- 🦢 CYGNUS -->
-<div class="estrella especial" id="c1" style="top:52%;left:22%;" data-message="Eres mi estrella guía 💙"></div>
-<div class="estrella especial" id="c2" style="top:44%;left:18%;" data-message="Siempre vuelvo a ti"></div>
-<div class="estrella especial" id="c3" style="top:36%;left:14%;" data-message="Incluso lejos, te siento cerca"></div>
-<div class="estrella especial" id="c4" style="top:28%;left:11%;" data-message="Tu luz me guía"></div>
-<div class="estrella especial" id="c5" style="top:60%;left:24%;" data-message="Nuestro camino continúa"></div>
-<div class="estrella especial" id="c6" style="top:68%;left:24%;" data-message="Mi lugar seguro"></div>
-<div class="estrella especial" id="c7" style="top:52%;left:12%;" data-message="Tus alas me abrazan"></div>
-<div class="estrella especial" id="c8" style="top:52%;left:32%;" data-message="Siempre me encuentras"></div>
-<div class="estrella especial" id="c9" style="top:60%;left:32%;" data-message="Todo se conecta"></div>
-<div class="estrella especial" id="c10" style="top:68%;left:32%;" data-message="Mi universo eres tú"></div>
+<div class="estrella especial" id="c1" style="top:45%;left:18%;" data-message="Eres mi estrella guía 💙"></div>
+<div class="estrella especial" id="c2" style="top:38%;left:15%;" data-message="Siempre vuelvo a ti"></div>
+<div class="estrella especial" id="c3" style="top:31%;left:12%;" data-message="Incluso lejos, te siento cerca"></div>
+<div class="estrella especial" id="c4" style="top:24%;left:10%;" data-message="Tu luz me guía"></div>
+<div class="estrella especial" id="c5" style="top:45%;left:26%;" data-message="Nuestro camino continúa"></div>
+<div class="estrella especial" id="c6" style="top:52%;left:26%;" data-message="Mi lugar seguro"></div>
+<div class="estrella especial" id="c7" style="top:58%;left:18%;" data-message="Tus alas me abrazan"></div>
+<div class="estrella especial" id="c8" style="top:65%;left:18%;" data-message="Siempre me encuentras"></div>
+<div class="estrella especial" id="c9" style="top:45%;left:32%;" data-message="Todo se conecta"></div>
+<div class="estrella especial" id="c10" style="top:45%;left:40%;" data-message="Mi universo eres tú"></div>
 
-<!-- 🦅 AQUILA (CORREGIDA, NO TELARAÑA) -->
-<div class="estrella especial" id="a1" style="top:52%;left:78%;" data-message="Contigo vuelo más alto 🦅"></div>
-<div class="estrella especial" id="a2" style="top:46%;left:80%;" data-message="Me haces sentir libre"></div>
-<div class="estrella especial" id="a3" style="top:40%;left:82%;" data-message="Tu luz me guía"></div>
+<!-- 🦅 AQUILA -->
+<!-- Cabeza -->
+<div class="estrella especial" id="a1" style="top:48%;left:70%;" data-message="Contigo vuelo más alto 🦅"></div>
+<div class="estrella especial" id="a2" style="top:44%;left:73%;" data-message="Me haces sentir libre"></div>
+<div class="estrella especial" id="a3" style="top:44%;left:67%;" data-message="Tu luz me guía"></div>
 
-<div class="estrella especial" id="a4" style="top:58%;left:70%;" data-message="Siempre regreso"></div>
-<div class="estrella especial" id="a5" style="top:64%;left:64%;" data-message="Mi cielo favorito eres tú"></div>
+<!-- Ala izquierda -->
+<div class="estrella especial" id="a4" style="top:55%;left:58%;" data-message="Siempre regreso"></div>
+<div class="estrella especial" id="a5" style="top:62%;left:52%;" data-message="Mi cielo favorito eres tú"></div>
 
-<div class="estrella especial" id="a6" style="top:58%;left:86%;" data-message="Tus alas me cuidan"></div>
-<div class="estrella especial" id="a7" style="top:64%;left:92%;" data-message="Eres mi destino"></div>
+<!-- Ala derecha -->
+<div class="estrella especial" id="a6" style="top:55%;left:82%;" data-message="Tus alas me cuidan"></div>
+<div class="estrella especial" id="a7" style="top:62%;left:88%;" data-message="Eres mi destino"></div>
 
-<div class="estrella especial" id="a8" style="top:50%;left:72%;" data-message="Siempre contigo"></div>
-<div class="estrella especial" id="a9" style="top:50%;left:84%;" data-message="Siempre aquí"></div>
+<!-- Cola -->
+<div class="estrella especial" id="a8" style="top:58%;left:70%;" data-message="Siempre contigo"></div>
+<div class="estrella especial" id="a9" style="top:66%;left:70%;" data-message="Siempre aquí"></div>
+
 
 <div id="popup" class="popup oculto">
   <p id="popup-text"></p>
@@ -143,23 +148,22 @@ for(let i=0;i<140;i++){
 const popup=document.getElementById("popup");
 const popupText=document.getElementById("popup-text");
 
-// 🔗 CONEXIONES (arregladas)
-const conexiones=[
-  // Lyra
+const conexiones = [
+  // LYRA
   ["l2","l3"],["l3","l4"],["l4","l5"],["l5","l2"],
   ["l1","l3"],
 
-  // Cisne
+  // CYGNUS
   ["c1","c2"],["c2","c3"],["c3","c4"],
   ["c1","c5"],["c5","c6"],
-  ["c1","c7"],["c1","c8"],["c8","c9"],["c9","c10"],
+  ["c1","c7"],["c7","c8"],
+  ["c1","c9"],["c9","c10"],
 
-  // Aquila (forma ave real)
-  ["a1","a2"],["a2","a3"],   // cabeza
-  ["a1","a4"],["a4","a5"],   // ala izquierda
-  ["a1","a6"],["a6","a7"],   // ala derecha
-  ["a1","a8"],               // hombro izq
-  ["a1","a9"]                // hombro der
+  // AQUILA (forma limpia)
+  ["a1","a2"],["a1","a3"],
+  ["a1","a4"],["a4","a5"],
+  ["a1","a6"],["a6","a7"],
+  ["a1","a8"],["a8","a9"]
 ];
 
 let tocadas=new Set();
