@@ -125,7 +125,6 @@ p{font-size:1.2rem;opacity:.85;}
 .texto-final{
   margin-top:10vh;
   width:70%;
-  max-width:800px;
   margin-left:auto;
   margin-right:auto;
   font-size:1.4rem;
@@ -221,17 +220,14 @@ p{font-size:1.2rem;opacity:.85;}
   Eres mi lugar favorito incluso en el infinito 💙
 </div>
 
+  </div>
+
   <div class="personas">👫</div>
-  
 </div>
 
   <div class="pasto"></div> 
   
 <script>
-  window.onload = () => {
-  window.scrollTo(0,0);
-};
-
 /* fondo estrellas */
 for(let i=0;i<140;i++){
   const e=document.createElement("div");
@@ -340,36 +336,29 @@ setTimeout(()=>{
 });
 
  if(completadas.size===3){
-  document.body.style.overflow = "hidden";
-
-setTimeout(()=>{
-  popup.classList.add("oculto");
-
-  mensajeFinal.classList.remove("oculto");
-  setTimeout(()=>mensajeFinal.classList.add("mostrar"),50);
-
   setTimeout(()=>{
-    mensajeFinal.classList.remove("mostrar");
-    mensajeFinal.classList.add("oculto");
-  },2500);
 
-  setTimeout(()=>{
-    bajarSuave();
+    popup.classList.add("oculto");
 
+    mensajeFinal.classList.remove("oculto");
     setTimeout(()=>{
-      textoFinal.classList.add("mostrar");
-    },1200);
+      mensajeFinal.classList.add("mostrar");
+    },50);
+    
+    setTimeout(()=>{
+  mensajeFinal.classList.remove("mostrar");
+  mensajeFinal.classList.add("oculto");
+},2500);
 
-  },3000);
-
-},3000);
 
     /* después baja la pantalla */
-    
+    setTimeout(()=>{
+      bajarSuave();
+      
   function bajarSuave(){
   let inicio = window.scrollY;
-  let destino = window.innerHeight * 3; // baja más lejos
-  let duracion = 20000;
+  let destino = window.innerHeight * 2; // baja más lejos
+  let duracion = 16000;
   let inicioTiempo = null;
 
   function animar(t){
@@ -381,9 +370,11 @@ setTimeout(()=>{
 
     if(p < 1){
       requestAnimationFrame(animar);
-    } else {
-     document.body.style.overflowY = "auto";
+    }
   }
+
+  requestAnimationFrame(animar);
+}
       
       setTimeout(()=>{
         textoFinal.classList.add("mostrar");
